@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakay Partido – Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── NAVIGATOR ─── -->
+<nav>
+    <a class="logo-container" href="index.html">
+        <div class="logo-circle">
+            <img src="Logo.png" alt="Sakay Partido Logo">
+        </div>
+        <h2>Sakay Partido</h2>
+    </a>
+    <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="data-gathering.html">Data Gathering</a>
+        <a href="result.html">Results &amp; Discussion</a>
+        <div class="dropdown">
+            <button class="dropdown-btn" id="moreBtn">
+                More
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="reflection.html"><span class="icon">💭</span> Reflection</a>
+                <a href="prototype.html"><span class="icon">📱</span> Prototype Walkthrough</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="page-header">
+    <div class="tag">Usability Evaluation Report</div>
+    <h1>Sakay Partido</h1>
+    <p>A transportation mobile app helping students and commuters find rides in Partido area.</p>
+</div>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+    <!-- About -->
+    <div class="section-divider">
+        <h2 class="section-title">About the System</h2>
+    </div>
+
+    <div class="info-strip">
+        <div class="icon-big">🛵</div>
+        <div>
+            <h3>What is Sakay Partido?</h3>
+            <p>Sakay Partido is a transportation mobile application designed to help students and commuters easily find available rides and routes going to Partido State University. 
+            It connects riders with motorcycle (door-to-door) and tricycle services, making daily commuting faster, safer, and more convenient.</p>
+        </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; margin-bottom:2.5rem;">
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">🎯</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">Goal</h3>
+                <p style="font-size:0.87rem;">Evaluate the usability and user experience of the Sakay Partido prototype via System Usability Scale (SUS).</p>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">👥</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">Respondents</h3>
+                <p style="font-size:0.87rem;">Students from Partido State University, ages 18–24, experienced in using smartphones and commuting daily.</p>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">📊</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">Method</h3>
+                <p style="font-size:0.87rem;">Heuristic evaluation by group members + SUS questionnaire answered by user participants.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group Members -->
+    <div class="section-divider">
+        <h2 class="section-title">Group Members</h2>
+    </div>
+
+    <div class="group-members">
+        <div class="member-card">
+            <img src="images/john.jpg" alt="BAT" class="member-image"
+                 onerror="this.outerHTML='<div class=\'member-image fallback\'>BAT</div>'">
+            <div class="member-name">Brian Al Tenorio</div>
+            <div class="member-role">Project Leader</div>
+        </div>
+        <div class="member-card">
+            <img src="images/maria.jpg" alt="SB" class="member-image"
+                 onerror="this.outerHTML='<div class=\'member-image fallback\'>SB</div>'">
+            <div class="member-name">Shejay Barranda</div>
+            <div class="member-role">UI/UX Designer</div>
+        </div>
+        <div class="member-card">
+            <img src= "MR Oriana.jpg" alt="MRO" class="member-image"
+                 onerror="this.outerHTML='<div class=\'member-image fallback\'>MRO</div>'">
+            <div class="member-name">Mary Rose Oriana</div>
+            <div class="member-role">Backend Developer</div>
+        </div>
+        <div class="member-card">
+            <img src="CJ Saor.jpg" alt="CJS" class="member-image"
+                 onerror="this.outerHTML='<div class=\'member-image fallback\'>CJS</div>'">
+            <div class="member-name">Christine Joy Saor</div>
+            <div class="member-role">Tester</div>
+        </div>
+    </div>
+
+    <!-- Prototype Preview -->
+    <div class="section-divider">
+        <h2 class="section-title">Prototype Preview</h2>
+    </div>
+
+    <div class="prototype-preview">
+        <img src="Prototype_Preview.png" alt="Sakay Partido Mobile App Prototype" class="prototype-screenshot">
+        <p>Sakay Partido Mobile Application — Login Screen Prototype</p>
+        <a href="prototype.html" style="display:inline-block; margin-top:1rem; background:var(--primary); color:#fff; padding:0.6rem 1.5rem; border-radius:99px; text-decoration:none; font-weight:600; font-size:0.88rem; transition:background 0.2s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'">
+            View Full Walkthrough →
+        </a>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 <span>Sakay Partido</span> Usability Evaluation Report &mdash; Partido State University</p>
+</footer>
+
+<script>
+    const btn = document.getElementById('moreBtn');
+    const menu = document.getElementById('dropdownMenu');
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.classList.remove('open');
+            menu.classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>
