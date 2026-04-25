@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakay Partido – Reflection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+    <a class="logo-container" href="index.html">
+        <div class="logo-circle">
+            <img src="Logo.png" alt="Sakay Partido Logo">
+        </div>
+        <h2>Sakay Partido</h2>
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="data-gathering.html">Data Gathering</a>
+        <a href="result.html">Results &amp; Discussion</a>
+        <div class="dropdown">
+            <button class="dropdown-btn open" id="moreBtn">
+                More
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="reflection.html" style="background:#eff6ff; color:var(--primary);"><span class="icon">💭</span> Reflection</a>
+                <a href="prototype.html"><span class="icon">📱</span> Prototype Walkthrough</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── HEADER ─── -->
+<div class="page-header">
+    <div class="tag">Reflection</div>
+    <h1>Our Reflections</h1>
+    <p>Personal insights and takeaways from each group member about the usability evaluation experience.</p>
+</div>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+    <div class="highlight-box" style="margin-bottom:2rem;">
+        <h4>💡 About This Section</h4>
+        <p>Each member of the Sakay Partido team shares their personal reflection on what they learned, what challenges they encountered, and how this study shaped their understanding of user-centered design.</p>
+    </div>
+
+    <!-- BRIAN -->
+    <div class="reflection-block">
+        <div class="author">
+            <div class="author-avatar">BAT</div>
+            <div class="author-info">
+                <strong>Brian Al Tenorio</strong>
+                <span>Project Leader</span>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- SHEJAY -->
+    <div class="reflection-block">
+        <div class="author">
+            <div class="author-avatar">SB</div>
+            <div class="author-info">
+                <strong>Shejay Barranda</strong>
+                <span>UI/UX Designer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARY ROSE -->
+    <div class="reflection-block">
+        <div class="author">
+            <div class="author-avatar">MRO</div>
+            <div class="author-info">
+                <strong>Mary Rose Oriana</strong>
+                <span>Backend Developer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHRISTINE -->
+    <div class="reflection-block">
+        <div class="author">
+            <div class="author-avatar">CJS</div>
+            <div class="author-info">
+                <strong>Christine Joy Saor</strong>
+                <span>Tester</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- GROUP REFLECTION -->
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Group Reflection</h2>
+    </div>
+
+    <div class="card">
+        <h3>Collective Takeaways</h3>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 <span>Sakay Partido</span> Usability Evaluation Report &mdash; Partido State University</p>
+</footer>
+
+<script>
+    const btn = document.getElementById('moreBtn');
+    const menu = document.getElementById('dropdownMenu');
+    // keep dropdown looking active but closed by default
+    btn.classList.remove('open');
+
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.classList.remove('open');
+            menu.classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>
