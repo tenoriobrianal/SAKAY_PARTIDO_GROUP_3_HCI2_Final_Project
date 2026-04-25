@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakay Partido – Prototype Walkthrough</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Walkthrough screen frames */
+        .screens-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0 2.5rem;
+            justify-content: center;
+        }
+
+        .screen-frame {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            padding: 1.25rem 1rem 1rem;
+            width: 200px;
+            transition: all 0.25s;
+        }
+
+        .screen-frame:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+            border-color: var(--primary-light);
+        }
+
+        .screen-frame img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .screen-frame .screen-placeholder {
+            width: 100%;
+            height: 280px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 2rem;
+            border: 1px dashed var(--primary-light);
+        }
+
+        .screen-frame .screen-placeholder span {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        .screen-frame .screen-label {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--dark);
+            margin-top: 0.75rem;
+        }
+
+        .screen-frame .screen-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* Feature grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0 2rem;
+        }
+
+        .feature-item {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .feature-item .feat-icon {
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-item h4 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            color: var(--dark);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .feature-item p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin: 0;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+
+<nav>
+    <a class="logo-container" href="index.html">
+        <div class="logo-circle">
+            <img src="Logo.png" alt="Sakay Partido Logo">
+        </div>
+        <h2>Sakay Partido</h2>
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="data-gathering.html">Data Gathering</a>
+        <a href="result.html">Results &amp; Discussion</a>
+        <div class="dropdown">
+            <button class="dropdown-btn" id="moreBtn">
+                More
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="reflection.html"><span class="icon">💭</span> Reflection</a>
+                <a href="prototype.html" style="background:#eff6ff; color:var(--primary);"><span class="icon">📱</span> Prototype Walkthrough</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ─── HEADER ─── -->
+<div class="page-header">
+    <div class="tag">Prototype</div>
+    <h1>Prototype Walkthrough</h1>
+    <p>A guided tour of the Sakay Partido mobile application screens and key features.</p>
+</div>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+    <!-- OVERVIEW -->
+    <div class="info-strip">
+        <div class="icon-big">📱</div>
+        <div>
+            <h3>About the Prototype</h3>
+            <p>Sakay Partido is a mobile-first application built to connect commuters at Partido State University with nearby motorcycle (door-to-door) and tricycle drivers. The prototype was developed for usability testing and covers the core booking flow from login to ride completion.</p>
+        </div>
+    </div>
+
+    <!-- KEY FEATURES -->
+    <div class="section-divider">
+        <h2 class="section-title">Key Features</h2>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <div class="feat-icon">🔐</div>
+            <h4>Secure Login</h4>
+            <p>Phone number and password authentication with a "Remember Me" option for convenience.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feat-icon">🛵</div>
+            <h4>Ride Type Selection</h4>
+            <p>Choose between motorcycle (door-to-door) or tricycle services based on your needs.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feat-icon">📍</div>
+            <h4>Route Finder</h4>
+            <p>Set your pickup and drop-off points easily within the Partido State University area.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feat-icon">⚡</div>
+            <h4>Quick Booking</h4>
+            <p>Book a ride in just a few taps with a streamlined, minimal-step interface.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feat-icon">📋</div>
+            <h4>Ride Summary</h4>
+            <p>Clear confirmation screen showing driver info, route, and estimated fare before confirming.</p>
+        </div>
+        <div class="feature-item">
+            <div class="feat-icon">👤</div>
+            <h4>User Profile</h4>
+            <p>Manage personal information and view ride preferences from your profile page.</p>
+        </div>
+    </div>
+
+    <!-- SCREEN-BY-SCREEN WALKTHROUGH -->
+    <div class="section-divider" style="margin-top:1rem;">
+        <h2 class="section-title">Screen-by-Screen Walkthrough</h2>
+    </div>
+
+    <!-- Login Screen -->
+    <div class="steps-list">
+
+        <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Splash / Welcome Screen</h4>
+                <p>The app opens with the Sakay Partido logo and a brief animation before directing users to the login screen. The splash screen reinforces brand identity with the blue color palette.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Login Screen</h4>
+                <p>Users enter their registered phone number and password. A "Remember Me" toggle and "Forgot Password" link are provided for convenience. New users can tap "Sign Up" at the bottom. The login screen is illustrated in the prototype screenshot below.</p>
+                <div style="margin-top:1rem; text-align:center;">
+                    <img src="1.png" alt="Login Screen" style="max-width:200px; border-radius:12px; box-shadow:var(--shadow-lg); border:1px solid var(--border);">
+                    <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem; font-style:italic;">Login Screen — Sakay Partido Prototype</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Registration / Sign Up</h4>
+                <p>New users provide their name, phone number, and create a password. Input validation ensures all fields meet requirements before allowing registration. A confirmation message is shown upon successful account creation.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">4</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Home / Dashboard</h4>
+                <p>After login, users land on the main dashboard which displays available ride types — Motorcycle and Tricycle. Quick-access buttons let users immediately start a booking. The dashboard also shows recent ride history if available.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">5</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Ride Type Selection</h4>
+                <p>Users choose between Motorcycle (door-to-door) or Tricycle. Each option displays an icon, brief description, and estimated availability in the area. This step ensures users pick the right transport mode for their needs.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">6</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Set Pickup &amp; Drop-off Location</h4>
+                <p>Users type or select their pickup and destination points. The interface is designed for the Partido State University area, with common locations pre-suggested for faster input.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">7</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Booking Confirmation</h4>
+                <p>A summary screen shows the selected ride type, pickup, destination, and estimated fare. Users confirm the booking by tapping the "Book Now" button. A confirmation dialog appears to prevent accidental bookings.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">8</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Waiting for Driver</h4>
+                <p>After booking, users see a status screen indicating that the system is searching for an available driver. A cancel option is available in case the user changes their mind.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">9</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Driver Matched / Ride Details</h4>
+                <p>Once a driver is matched, the app displays driver name, contact number, vehicle description, and estimated arrival time. Users can call or message the driver directly from this screen.</p>
+            </div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-num">10</div>
+            <div class="step-body" style="flex:1;">
+                <h4>Ride Completion</h4>
+                <p>After the ride, the app shows a completion screen with a ride summary and a prompt to rate the experience. This closes the feedback loop and helps maintain service quality.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- DESIGN NOTES -->
+    <div class="section-divider" style="margin-top:2rem;">
+        <h2 class="section-title">Design Notes</h2>
+    </div>
+
+    <div class="card">
+        <h3>🎨 Visual &amp; UX Design Decisions</h3>
+        <p>
+            The Sakay Partido prototype was designed with a clean, minimal blue-dominant color scheme that conveys trust, reliability, and movement — 
+            all qualities essential for a transportation service. The use of rounded corners, card-based layouts, and clear call-to-action 
+            buttons follows current mobile UI best practices.
+        </p>
+        <p>
+            Typography uses a bold, readable font hierarchy to guide user attention naturally from headings to actions. 
+            White space is used intentionally to reduce cognitive load, particularly on the booking and confirmation screens 
+            where clarity is critical.
+        </p>
+        <p>
+            Every screen was designed with the target audience in mind — young university students who are comfortable 
+            with smartphones but may be first-time users of a dedicated ride-booking platform. Simplicity and speed 
+            were the guiding principles throughout the design process.
+        </p>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 <span>Sakay Partido</span> Usability Evaluation Report &mdash; Partido State University</p>
+</footer>
+
+<script>
+    const btn = document.getElementById('moreBtn');
+    const menu = document.getElementById('dropdownMenu');
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.classList.remove('open');
+            menu.classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>
