@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakay Partido – Results &amp; Discussion</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ─── BAR CHART ─── */
+        .bar-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.65rem;
+        }
+        .bar-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text);
+            width: 28px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .bar-track {
+            flex: 1;
+            height: 20px;
+            background: #f1f5f9;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--primary), #60a5fa);
+            transition: width 0.8s ease;
+        }
+        .bar-fill.negative {
+            background: linear-gradient(90deg, #94a3b8, #cbd5e1);
+        }
+        .bar-val {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            width: 36px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        /* ─── ISSUE LIST ─── */
+        .issue-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+        .issue-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .issue-list li:last-child { border-bottom: none; }
+        .issue-list .issue-icon {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .issue-list strong {
+            display: block;
+            color: var(--text);
+            font-weight: 700;
+            margin-bottom: 0.1rem;
+        }
+
+        /* ─── RECOMMENDATION ITEMS ─── */
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .rec-item {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1.1rem 1.25rem;
+            border-left: 4px solid var(--primary);
+        }
+        .rec-item .rec-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+        .rec-item h4 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            color: var(--dark);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        .rec-item p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin: 0;
+            text-align: left;
+        }
+
+        /* ─── SUS GAUGE ─── */
+        .sus-gauge {
+            position: relative;
+            width: 160px;
+            height: 80px;
+            margin: 0 auto 0.75rem;
+        }
+        .sus-gauge svg { overflow: visible; }
+        .sus-label-big {
+            font-family: 'Nunito', sans-serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .sus-center {
+            text-align: center;
+        }
+
+        /* severity badge */
+        .sev {
+            display: inline-block;
+            border-radius: 99px;
+            padding: 0.15rem 0.65rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .sev-low  { background:#dcfce7; color:#166534; }
+        .sev-med  { background:#fef9c3; color:#854d0e; }
+        .sev-high { background:#fee2e2; color:#991b1b; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a class="logo-container" href="index.html">
+        <div class="logo-circle">
+            <img src="Logo.png" alt="Sakay Partido Logo">
+        </div>
+        <h2>Sakay Partido</h2>
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="data-gathering.html">Data Gathering</a>
+        <a href="result.html" class="active">Results &amp; Discussion</a>
+        <div class="dropdown">
+            <button class="dropdown-btn" id="moreBtn">
+                More
+                <svg viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="reflection.html"><span class="icon">💭</span> Reflection</a>
+                <a href="prototype.html"><span class="icon">📱</span> Prototype Walkthrough</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="page-header">
+    <div class="tag">Analysis</div>
+    <h1>Results &amp; Discussion</h1>
+    <p>Summary of SUS scores, heuristic findings, and insights gathered from the usability evaluation.</p>
+</div>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+    <div class="section-divider">
+        <h2 class="section-title">SUS Score Overview</h2>
+    </div>
+
+    <div class="highlight-box">
+        <h4>📊 System Usability Scale (SUS) — Summary</h4>
+        <p>The SUS is a 10-item questionnaire that produces a score from 0–100. Scores above 68 are considered above average, while scores at or above 80.3 fall in the "Excellent" range. Below are the aggregated results from our respondents.</p>
+    </div>
+
+
+    <!-- Per-respondent SUS scores table -->
+    <div class="card">
+        <h3>📋 Individual SUS Scores per Respondent</h3>
+        <div class="table-wrapper">
+          
+        </div>
+        <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--text-muted);">
+            * SUS Score = Raw Score × 2.5 &nbsp;|&nbsp; Excellent: ≥80.3 &nbsp;|&nbsp; Good: 68–80.2 &nbsp;|&nbsp; Acceptable: 51–67.9
+        </p>
+    </div>
+
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Per-Item Results</h2>
+    </div>
+
+    <div class="card">
+        <h3>📋 SUS Question Scores (Mean Rating)</h3>
+        <div class="table-wrapper" style="margin-top:0.5rem;">
+            
+        </div>
+        <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--text-muted);">
+            * For <strong>positive</strong> items, contribution = mean − 1. For <strong>negative</strong> items, contribution = 5 − mean. Total SUS = sum of contributions × 2.5.
+        </p>
+    </div>
+
+    <!-- Visual bar chart of mean ratings -->
+    <div class="card">
+        <h3>📊 Mean Ratings per SUS Item (Visual)</h3>
+        <p style="margin-bottom:1.25rem; font-size:0.88rem;">Bars represent the mean score (1–5 scale) per question. Shaded bars are negative items where a lower score indicates better usability.</p>
+
+    </div>
+
+
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Key Issues Identified</h2>
+    </div>
+
+    <div class="card">
+        <h3>⚠️ Usability Issues Found During Testing</h3>
+        <p style="margin-bottom:1rem;">During the heuristic evaluation and usability testing sessions, the following key issues were identified and documented across different usability dimensions.</p>
+
+    </div>
+
+
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Heuristic Evaluation Findings</h2>
+    </div>
+
+    <div class="card">
+        <h3>🔍 Key Findings per Evaluator</h3>
+
+        <div class="member-eval">
+            <strong>Brian Al Tenorio — Visibility &amp; User Control</strong>
+   
+        </div>
+
+        <div class="member-eval">
+            <strong>Shejay Barranda — UI Consistency &amp; Design</strong>
+       
+        </div>
+
+        <div class="member-eval">
+            <strong>Mary Rose Oriana — Error Prevention &amp; Feedback</strong>
+        </div>
+
+        <div class="member-eval">
+            <strong>Christine Joy Saor — Overall Usability &amp; Efficiency</strong>
+           
+        </div>
+    </div>
+
+
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Discussion</h2>
+    </div>
+
+    <div class="card">
+        <h3>💬 Interpretation of Results</h3>
+    
+    </div>
+
+
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Recommendations</h2>
+    </div>
+
+    <div class="card">
+        <h3>✅ Recommendations for Improving the Prototype</h3>
+        <p style="margin-bottom:1rem;">Based on the SUS scores, heuristic evaluation findings, and qualitative feedback from respondents, the following improvements are recommended for the next version of the Sakay Partido prototype.</p>
+
+        <div class="rec-grid">
+</div>
+    </div>
+
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Suggested Design Improvements</h2>
+    </div>
+
+    <div class="card">
+        <h3>🎨 Design-Level Enhancements</h3>
+        <p style="margin-bottom:1.25rem;">Beyond functional fixes, the following design-level changes are suggested to elevate the user interface quality and align the prototype more closely with established mobile UX standards.</p>
+
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2025 <span>Sakay Partido</span> Usability Evaluation Report &mdash; Partido State University</p>
+</footer>
+
+<script>
+    /* ─── Dropdown ─── */
+    const btn = document.getElementById('moreBtn');
+    const menu = document.getElementById('dropdownMenu');
+    btn.addEventListener('click', () => {
+        btn.classList.toggle('open');
+        menu.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.classList.remove('open');
+            menu.classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>
