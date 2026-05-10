@@ -5,6 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sakay Partido – Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .section-divider::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary, #3b82f6), transparent);
+            border-radius: 99px;
+        }
+        .section-title {
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
 

@@ -6,6 +6,24 @@
     <title>Sakay Partido – Results &amp; Discussion</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .section-divider::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary, #3b82f6), transparent);
+            border-radius: 99px;
+        }
+        .section-title {
+            white-space: nowrap;
+        }
+    </style>
+    <style>
         /* ─── BAR CHART ─── */
         .bar-row {
             display: flex;
@@ -290,7 +308,7 @@
             <div class="stat-lbl">Highest Score</div>
         </div>
         <div class="sus-stat">
-            <div class="stat-val warn">Acceptable</div>
+            <div class="stat-val warn" style="font-size:1.1rem; line-height:1.3;">Acceptable</div>
             <div class="stat-lbl">Overall SUS Grade</div>
         </div>
     </div>
