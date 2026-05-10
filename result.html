@@ -251,9 +251,6 @@
 <!-- ─── MAIN ─── -->
 <main>
 
-    <!-- ══════════════════════════════════════ -->
-    <!--  SUS SCORE OVERVIEW                   -->
-    <!-- ══════════════════════════════════════ -->
     <div class="section-divider">
         <h2 class="section-title">SUS Score Overview</h2>
     </div>
@@ -280,10 +277,6 @@
         <div class="sus-stat">
             <div class="stat-val good">85.0</div>
             <div class="stat-lbl">Highest Score</div>
-        </div>
-        <div class="sus-stat">
-            <div class="stat-val">15.37</div>
-            <div class="stat-lbl">Std. Deviation</div>
         </div>
         <div class="sus-stat">
             <div class="stat-val warn">Acceptable</div>
@@ -317,9 +310,6 @@
     </div>
 
 
-    <!-- ══════════════════════════════════════ -->
-    <!--  PER-RESPONDENT SUS SCORES TABLE      -->
-    <!-- ══════════════════════════════════════ -->
     <div class="card">
         <h3>📋 Individual SUS Scores per Respondent</h3>
         <div class="table-wrapper">
@@ -369,10 +359,6 @@
         </p>
     </div>
 
-
-    <!-- ══════════════════════════════════════ -->
-    <!--  PER-ITEM RESULTS                     -->
-    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Per-Item Results</h2>
     </div>
@@ -557,9 +543,6 @@
     </div>
 
 
-    <!-- ══════════════════════════════════════ -->
-    <!--  KEY ISSUES                           -->
-    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Key Issues Identified</h2>
     </div>
@@ -573,14 +556,14 @@
                 <span class="issue-icon">🆘</span>
                 <div>
                     <strong>SOS Button Discoverability <span class="sev sev-high">High Severity</span></strong>
-                    Multiple respondents explicitly reported difficulty finding the SOS/emergency button. Comments included: "I can't find the SOS immediately," "the SOS should be found easily," and "I have a hard time finding it." This is a critical safety feature that must be prominently placed.
+                    Multiple respondents explicitly reported difficulty finding the SOS/emergency button. Comments included: "I can't find the SOS immediately," "the SOS should be found easily," and "I have a hard time finding it." This is a critical safety feature that must be prominently placed. Also one of our heuristic evaluation finding identified this issue.
                 </div>
             </li>
             <li>
                 <span class="issue-icon">⚠️</span>
                 <div>
                     <strong>No Cancel Confirmation Dialog <span class="sev sev-high">High Severity</span></strong>
-                    One respondent noted: "when I cancel some actions, it immediately goes — I didn't see a warning." The lack of a confirmation prompt when cancelling rides or actions can lead to accidental loss of bookings.
+                    One respondent noted: "when I cancel some actions, it immediately goes — I didn't see a warning." The lack of a confirmation prompt when cancelling rides or actions can lead to accidental loss of bookings. Same as one of our heuristic evaluation in in no error message for cancel booking and add a place.
                 </div>
             </li>
             <li>
@@ -594,9 +577,6 @@
     </div>
 
 
-    <!-- ══════════════════════════════════════ -->
-    <!--  HEURISTIC EVALUATION FINDINGS        -->
-    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Heuristic Evaluation Findings</h2>
     </div>
@@ -662,7 +642,6 @@
         <p style="font-size:0.88rem; color:var(--text-muted);">The following are selected improvement suggestions gathered from respondents:</p>
         <ul class="quote-list">
             <li>"Make things (like buttons) easy to understand and ensure they are functional. When booking a ride, the SOS should be activated automatically so it won't be missed."</li>
-            <li>"Add a fare estimation feature so passengers/users can see the expected payment before booking."</li>
             <li>"The SOS should be easy to find — I had a hard time locating it."</li>
             <li>"When cancelling actions, a warning or confirmation message should appear first."</li>
             <li>"If I need emergency help immediately, I can't find the SOS button quickly enough."</li>
@@ -680,19 +659,13 @@
     <div class="card">
         <h3>💬 Interpretation of Results</h3>
         <p>
-            The overall mean SUS score of <strong>63.25</strong> places the Sakay Partido prototype within the <strong>"Acceptable"</strong> usability range (51–67.9) based on the standard SUS grading scale. While this indicates that the system is generally usable, it falls short of the "Good" (≥68) threshold, suggesting that meaningful improvements are still needed before the system is ready for broader deployment.
-        </p>
+           The Sakay Partido prototype received an overall mean SUS score of <strong>63.25</strong> which falls within the <strong>"Acceptable"</strong> usability range according to standard SUS grading scale (51–67.9). The system shows basic usability according to the assessment results but needs additional improvements before reaching the "Good" threshold which requires a score of 68 or higher. The system must undergo essential enhancements before it can be used by a wider audience. </p>
         <p>
-            The high score on Q9 (mean 4.30 — "I felt very confident using the system") and Q5 (mean 4.05 — "The functions were well integrated") suggests that the overall design structure and feature set are intuitive and coherent. Respondents who are regular commuters and smartphone users found the core concept immediately relatable, which contributed to their confidence. The positive qualitative responses consistently praised the app's convenience and its potential to solve a real gap in local transportation — the absence of ride-hailing apps in the Partido area.
-        </p>
+           The design structure and feature set of the system show intuitive and coherent functionality because users achieved high scores in Q9 which recorded a mean of <strong>4.30</strong> for "I felt very confident using the system" and Q5 which received a mean score of <strong>4.05</strong> for "The functions were well integrated. Regular commuters who use smartphones established immediate connections with the core concept which created trust in them. The positive qualitative responses consistently praised the app's convenience and its potential to solve a real gap in local transportation — the absence of ride-booking apps in the Partido area.</p>
         <p>
-            However, lower contributions from Q4 (Technical Support, contribution 1.95) and Q10 (Learning Curve, contribution 1.80) reveal that a notable portion of respondents felt the system required more effort to learn than expected. The wide standard deviation of <strong>15.37</strong> further indicates highly varied user experiences — some users rated the system as Excellent (85.0) while others gave Poor scores (37.5). This polarization likely stems from differences in prior familiarity with similar ride-hailing apps and the varying degree of difficulty in locating secondary features like the SOS button.
-        </p>
+            The majority of respondents perceived easier system navigation according to lower Q4 Technical Support and Q10 Learning Curve scores which received <strong>1.95</strong> and <strong>1.80</strong> respectively. The standard deviation of <strong>15.37</strong> indicates that users experienced different levels of satisfaction since some users considered the system to be Excellent with an 85.0 rating while others gave it a Poor rating of 37.5. The differing user experiences resulted from users' previous knowledge of ride-hailing applications together with their ability to find hidden features such as the SOS button. </p>
         <p>
-            The most consistent issue raised — the SOS button discoverability — is a significant usability and safety concern. In a transportation context, emergency features must be immediately accessible without requiring users to search for them. Addressing this single issue may have the largest positive impact on the overall SUS score in a subsequent evaluation. Similarly, the lack of onboarding guidance for first-time users and the absence of a fare estimation screen are gaps that are well-documented best practices in ride-hailing application design.
-        </p>
-        <p>
-            In summary, the results suggest that Sakay Partido has a strong conceptual foundation and addresses a genuine local need, but the prototype requires targeted improvements in safety feature accessibility, error prevention, onboarding, and pricing transparency to achieve a "Good" or "Excellent" SUS rating in future evaluations.
+          For summary, the SOS button discoverability problem represents the main usability issue which affects system safety for users.
         </p>
     </div>
 
