@@ -141,6 +141,229 @@
         </div>
     </div>
 
+    <!-- HEURISTIC EVALUATION PDFs -->
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Heuristic Evaluation Documents</h2>
+    </div>
+
+    <style>
+        .pdf-member-block {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+        }
+        .pdf-member-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.1rem 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            gap: 1rem;
+            transition: background 0.2s;
+        }
+        .pdf-member-header:hover { background: #f8fafc; }
+        .pdf-member-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+        .pdf-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 0.78rem;
+            flex-shrink: 0;
+        }
+        .pdf-member-name {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            color: var(--dark);
+            font-size: 0.97rem;
+        }
+        .pdf-member-role {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.1rem;
+        }
+        .pdf-badge {
+            background: #eff6ff;
+            color: var(--primary);
+            border-radius: 99px;
+            padding: 0.2rem 0.75rem;
+            font-size: 0.74rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .pdf-toggle-icon {
+            color: var(--primary);
+            font-size: 1.1rem;
+            transition: transform 0.25s;
+            flex-shrink: 0;
+        }
+        .pdf-toggle-icon.rotated { transform: rotate(180deg); }
+        .pdf-body {
+            display: none;
+            border-top: 1px solid var(--border);
+            padding: 1.25rem 1.5rem 1.5rem;
+        }
+        .pdf-body.open { display: block; }
+        .pdf-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .pdf-tab-btn {
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 0.35rem 1rem;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pdf-tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .pdf-tab-btn:hover:not(.active) { background: #e2e8f0; }
+        .pdf-frame-wrap { position: relative; }
+        .pdf-frame-wrap iframe {
+            width: 100%;
+            height: 620px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            display: block;
+        }
+        .pdf-open-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .pdf-open-link:hover { text-decoration: underline; }
+    </style>
+
+    <!-- Brian — 2 PDFs -->
+    <div class="pdf-member-block">
+        <div class="pdf-member-header" onclick="togglePdf(this)">
+            <div class="pdf-member-header-left">
+                <div class="pdf-avatar">BAT</div>
+                <div>
+                    <div class="pdf-member-name">Brian Al Tenorio</div>
+                    <div class="pdf-member-role">Project Leader — Data Analyst / Documenter</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+                <span class="pdf-badge">2 Documents</span>
+                <span class="pdf-toggle-icon">▼</span>
+            </div>
+        </div>
+        <div class="pdf-body">
+            <div class="pdf-tabs">
+                <button class="pdf-tab-btn active" onclick="switchTab(this, 'res-bat-pdf-1')">Evaluation 1</button>
+                <button class="pdf-tab-btn" onclick="switchTab(this, 'res-bat-pdf-2')">Evaluation 2</button>
+            </div>
+            <div class="pdf-frame-wrap" id="res-bat-pdf-1">
+                <iframe src="Tenorio1_Heuristic_Evaluation.pdf" title="Brian Al Tenorio — Heuristic Evaluation 1"></iframe>
+                <a class="pdf-open-link" href="Tenorio1_Heuristic_Evaluation.pdf" target="_blank">↗ Open in new tab</a>
+            </div>
+            <div class="pdf-frame-wrap" id="res-bat-pdf-2" style="display:none;">
+                <iframe src="Tenorio2_Heuristic_Evaluation.pdf" title="Brian Al Tenorio — Heuristic Evaluation 2"></iframe>
+                <a class="pdf-open-link" href="Tenorio2_Heuristic_Evaluation.pdf" target="_blank">↗ Open in new tab</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shejay — 1 PDF -->
+    <div class="pdf-member-block">
+        <div class="pdf-member-header" onclick="togglePdf(this)">
+            <div class="pdf-member-header-left">
+                <div class="pdf-avatar">SB</div>
+                <div>
+                    <div class="pdf-member-name">Shejay Barranda</div>
+                    <div class="pdf-member-role">Member - UI/UX Designer</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+                <span class="pdf-badge">1 Document</span>
+                <span class="pdf-toggle-icon">▼</span>
+            </div>
+        </div>
+        <div class="pdf-body">
+            <div class="pdf-frame-wrap">
+                <iframe src="Barranda_Heuristic_Evaluation.pdf" title="Shejay Barranda — Heuristic Evaluation"></iframe>
+                <a class="pdf-open-link" href="Barranda_Heuristic_Evaluation.pdf" target="_blank">↗ Open in new tab</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mary Rose — 1 PDF -->
+    <div class="pdf-member-block">
+        <div class="pdf-member-header" onclick="togglePdf(this)">
+            <div class="pdf-member-header-left">
+                <div class="pdf-avatar">MRO</div>
+                <div>
+                    <div class="pdf-member-name">Mary Rose Oriana</div>
+                    <div class="pdf-member-role">Member - Prototype Presenter / Data Gatherer</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+                <span class="pdf-badge">1 Document</span>
+                <span class="pdf-toggle-icon">▼</span>
+            </div>
+        </div>
+        <div class="pdf-body">
+            <div class="pdf-frame-wrap">
+                <iframe src="Oriana_Heuristic_Evaluation.pdf" title="Mary Rose Oriana — Heuristic Evaluation"></iframe>
+                <a class="pdf-open-link" href="Oriana_Heuristic_Evaluation.pdf" target="_blank">↗ Open in new tab</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Christine Joy — 1 PDF -->
+    <div class="pdf-member-block">
+        <div class="pdf-member-header" onclick="togglePdf(this)">
+            <div class="pdf-member-header-left">
+                <div class="pdf-avatar">CJS</div>
+                <div>
+                    <div class="pdf-member-name">Christine Joy Saor</div>
+                    <div class="pdf-member-role">Member - Documenter</div>
+                </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.6rem;">
+                <span class="pdf-badge">1 Document</span>
+                <span class="pdf-toggle-icon">▼</span>
+            </div>
+        </div>
+        <div class="pdf-body">
+            <div class="pdf-frame-wrap">
+                <iframe src="Saor_Heuristic_Evaluation.pdf" title="Christine Joy Saor — Heuristic Evaluation"></iframe>
+                <a class="pdf-open-link" href="Saor_Heuristic_Evaluation.pdf" target="_blank">↗ Open in new tab</a>
+            </div>
+        </div>
+    </div>
+
+
     <!-- SUS QUESTIONNAIRE -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">SUS Questionnaire</h2>
@@ -280,6 +503,23 @@
             menu.classList.remove('open');
         }
     });
+
+    function togglePdf(header) {
+        const body = header.nextElementSibling;
+        const icon = header.querySelector('.pdf-toggle-icon');
+        body.classList.toggle('open');
+        icon.classList.toggle('rotated');
+    }
+
+    function switchTab(tabBtn, targetId) {
+        // Deactivate all sibling tab buttons
+        tabBtn.closest('.pdf-tabs').querySelectorAll('.pdf-tab-btn').forEach(b => b.classList.remove('active'));
+        tabBtn.classList.add('active');
+        // Hide all pdf frames in this block, show target
+        const block = tabBtn.closest('.pdf-body');
+        block.querySelectorAll('.pdf-frame-wrap').forEach(f => f.style.display = 'none');
+        block.querySelector('#' + targetId).style.display = 'block';
+    }
 </script>
 </body>
 </html>
