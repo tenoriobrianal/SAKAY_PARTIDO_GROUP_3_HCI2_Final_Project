@@ -45,6 +45,7 @@
             text-align: right;
             flex-shrink: 0;
         }
+        .bar-val.negative { color: #64748b; }
 
         /* ─── ISSUE LIST ─── */
         .issue-list {
@@ -104,21 +105,34 @@
         }
 
         /* ─── SUS GAUGE ─── */
-        .sus-gauge {
-            position: relative;
-            width: 160px;
-            height: 80px;
-            margin: 0 auto 0.75rem;
+        .sus-summary-box {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+            margin: 1.25rem 0;
         }
-        .sus-gauge svg { overflow: visible; }
-        .sus-label-big {
+        .sus-stat {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 1rem;
+            text-align: center;
+        }
+        .sus-stat .stat-val {
             font-family: 'Nunito', sans-serif;
-            font-size: 2.4rem;
+            font-size: 2rem;
             font-weight: 900;
             color: var(--primary);
+            line-height: 1;
         }
-        .sus-center {
-            text-align: center;
+        .sus-stat .stat-val.good  { color: #16a34a; }
+        .sus-stat .stat-val.warn  { color: #d97706; }
+        .sus-stat .stat-val.bad   { color: #dc2626; }
+        .sus-stat .stat-lbl {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-top: 0.3rem;
         }
 
         /* severity badge */
@@ -132,6 +146,72 @@
         .sev-low  { background:#dcfce7; color:#166534; }
         .sev-med  { background:#fef9c3; color:#854d0e; }
         .sev-high { background:#fee2e2; color:#991b1b; }
+
+        /* ─── SCORE TABLE ─── */
+        .score-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        .score-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.6rem 0.9rem;
+            text-align: left;
+            font-weight: 700;
+        }
+        .score-table td {
+            padding: 0.55rem 0.9rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+        .score-table tr:last-child td { border-bottom: none; }
+        .score-table tr:nth-child(even) td { background: #f8fafc; }
+        .score-tag {
+            display: inline-block;
+            border-radius: 99px;
+            padding: 0.15rem 0.65rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+        .tag-excellent { background:#dbeafe; color:#1e40af; }
+        .tag-good      { background:#dcfce7; color:#166534; }
+        .tag-acceptable{ background:#fef9c3; color:#854d0e; }
+        .tag-poor      { background:#fee2e2; color:#991b1b; }
+
+        /* ─── QUALITATIVE ─── */
+        .quote-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.75rem 0 0;
+        }
+        .quote-list li {
+            padding: 0.6rem 0.75rem;
+            border-left: 3px solid var(--primary-light);
+            margin-bottom: 0.5rem;
+            background: #f8fafc;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.87rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .quote-list li:last-child { margin-bottom: 0; }
+
+        /* ─── PIE LEGEND ─── */
+        .dist-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .dist-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 4px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -165,33 +245,134 @@
 <div class="page-header">
     <div class="tag">Analysis</div>
     <h1>Results &amp; Discussion</h1>
-    <p>Summary of SUS scores, heuristic findings, and insights gathered from the usability evaluation.</p>
+    <p>Summary of SUS scores, heuristic findings, and insights gathered from the usability evaluation of 20 respondents.</p>
 </div>
 
 <!-- ─── MAIN ─── -->
 <main>
 
+    <!-- ══════════════════════════════════════ -->
+    <!--  SUS SCORE OVERVIEW                   -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider">
         <h2 class="section-title">SUS Score Overview</h2>
     </div>
 
     <div class="highlight-box">
         <h4>📊 System Usability Scale (SUS) — Summary</h4>
-        <p>The SUS is a 10-item questionnaire that produces a score from 0–100. Scores above 68 are considered above average, while scores at or above 80.3 fall in the "Excellent" range. Below are the aggregated results from our respondents.</p>
+        <p>The SUS is a 10-item questionnaire that produces a score from 0–100. Scores above 68 are considered above average, while scores at or above 80.3 fall in the "Excellent" range. A total of <strong>20 respondents</strong> (3rd year BSOA students from Partido State University) completed the evaluation.</p>
+    </div>
+
+    <!-- Summary stat boxes -->
+    <div class="sus-summary-box">
+        <div class="sus-stat">
+            <div class="stat-val warn">63.25</div>
+            <div class="stat-lbl">Mean SUS Score</div>
+        </div>
+        <div class="sus-stat">
+            <div class="stat-val">20</div>
+            <div class="stat-lbl">Total Respondents</div>
+        </div>
+        <div class="sus-stat">
+            <div class="stat-val bad">37.5</div>
+            <div class="stat-lbl">Lowest Score</div>
+        </div>
+        <div class="sus-stat">
+            <div class="stat-val good">85.0</div>
+            <div class="stat-lbl">Highest Score</div>
+        </div>
+        <div class="sus-stat">
+            <div class="stat-val">15.37</div>
+            <div class="stat-lbl">Std. Deviation</div>
+        </div>
+        <div class="sus-stat">
+            <div class="stat-val warn">Acceptable</div>
+            <div class="stat-lbl">Overall SUS Grade</div>
+        </div>
+    </div>
+
+    <!-- Score distribution summary -->
+    <div class="card" style="margin-bottom:2rem;">
+        <h3>📊 Score Distribution by Grade</h3>
+        <p style="margin-bottom:1rem; font-size:0.88rem;">Based on the standard SUS adjective scale, respondent scores were distributed as follows:</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:0.75rem;">
+            <div style="background:#dbeafe; border-radius:var(--radius-sm); padding:0.9rem 1rem; text-align:center;">
+                <div style="font-size:1.8rem; font-weight:900; font-family:'Nunito',sans-serif; color:#1e40af;">3</div>
+                <div style="font-size:0.78rem; font-weight:700; color:#1e40af;">Excellent (≥80.3)</div>
+            </div>
+            <div style="background:#dcfce7; border-radius:var(--radius-sm); padding:0.9rem 1rem; text-align:center;">
+                <div style="font-size:1.8rem; font-weight:900; font-family:'Nunito',sans-serif; color:#166534;">6</div>
+                <div style="font-size:0.78rem; font-weight:700; color:#166534;">Good (68–80.2)</div>
+            </div>
+            <div style="background:#fef9c3; border-radius:var(--radius-sm); padding:0.9rem 1rem; text-align:center;">
+                <div style="font-size:1.8rem; font-weight:900; font-family:'Nunito',sans-serif; color:#854d0e;">5</div>
+                <div style="font-size:0.78rem; font-weight:700; color:#854d0e;">Acceptable (51–67.9)</div>
+            </div>
+            <div style="background:#fee2e2; border-radius:var(--radius-sm); padding:0.9rem 1rem; text-align:center;">
+                <div style="font-size:1.8rem; font-weight:900; font-family:'Nunito',sans-serif; color:#991b1b;">6</div>
+                <div style="font-size:0.78rem; font-weight:700; color:#991b1b;">Poor (≤50.9)</div>
+            </div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.82rem; color:var(--text-muted);">The majority of respondents (9 out of 20) rated the system as "Good" or "Excellent", while 6 respondents rated it "Poor", pointing to specific usability concerns that need to be addressed.</p>
     </div>
 
 
-    <!-- Per-respondent SUS scores table -->
+    <!-- ══════════════════════════════════════ -->
+    <!--  PER-RESPONDENT SUS SCORES TABLE      -->
+    <!-- ══════════════════════════════════════ -->
     <div class="card">
         <h3>📋 Individual SUS Scores per Respondent</h3>
         <div class="table-wrapper">
-          
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Respondent</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Raw Score</th>
+                        <th>SUS Score</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>Erika Jill Pacao</td><td>Female</td><td>21</td><td>20</td><td>50.0</td><td><span class="score-tag tag-poor">Poor</span></td></tr>
+                    <tr><td>2</td><td>Danica</td><td>Female</td><td>23</td><td>22</td><td>55.0</td><td><span class="score-tag tag-acceptable">Acceptable</span></td></tr>
+                    <tr><td>3</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>19</td><td>47.5</td><td><span class="score-tag tag-poor">Poor</span></td></tr>
+                    <tr><td>4</td><td>Kris Ann Primavera</td><td>Female</td><td>20</td><td>24</td><td>60.0</td><td><span class="score-tag tag-acceptable">Acceptable</span></td></tr>
+                    <tr><td>5</td><td>(Anonymous)</td><td>Female</td><td>20</td><td>23</td><td>57.5</td><td><span class="score-tag tag-acceptable">Acceptable</span></td></tr>
+                    <tr><td>6</td><td>Kimberly Parola</td><td>Female</td><td>22</td><td>31</td><td>77.5</td><td><span class="score-tag tag-good">Good</span></td></tr>
+                    <tr><td>7</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>15</td><td>37.5</td><td><span class="score-tag tag-poor">Poor</span></td></tr>
+                    <tr><td>8</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>20</td><td>50.0</td><td><span class="score-tag tag-poor">Poor</span></td></tr>
+                    <tr><td>9</td><td>Lenie Necerio Rodriguez</td><td>Female</td><td>27</td><td>21</td><td>52.5</td><td><span class="score-tag tag-acceptable">Acceptable</span></td></tr>
+                    <tr><td>10</td><td>(Anonymous)</td><td>Female</td><td>23</td><td>22</td><td>55.0</td><td><span class="score-tag tag-acceptable">Acceptable</span></td></tr>
+                    <tr><td>11</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>30</td><td>75.0</td><td><span class="score-tag tag-good">Good</span></td></tr>
+                    <tr><td>12</td><td>(Anonymous)</td><td>Male</td><td>22</td><td>20</td><td>50.0</td><td><span class="score-tag tag-poor">Poor</span></td></tr>
+                    <tr><td>13</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>17</td><td>42.5</td><td><span class="score-tag tag-poor">Poor</span></td></tr>
+                    <tr><td>14</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>28</td><td>70.0</td><td><span class="score-tag tag-good">Good</span></td></tr>
+                    <tr><td>15</td><td>(Anonymous)</td><td>Male</td><td>20</td><td>34</td><td>85.0</td><td><span class="score-tag tag-excellent">Excellent</span></td></tr>
+                    <tr><td>16</td><td>(Anonymous)</td><td>Male</td><td>22</td><td>33</td><td>82.5</td><td><span class="score-tag tag-excellent">Excellent</span></td></tr>
+                    <tr><td>17</td><td>(Anonymous)</td><td>Male</td><td>23</td><td>34</td><td>85.0</td><td><span class="score-tag tag-excellent">Excellent</span></td></tr>
+                    <tr><td>18</td><td>(Anonymous)</td><td>Female</td><td>21</td><td>31</td><td>77.5</td><td><span class="score-tag tag-good">Good</span></td></tr>
+                    <tr><td>19</td><td>(Anonymous)</td><td>Male</td><td>20</td><td>30</td><td>75.0</td><td><span class="score-tag tag-good">Good</span></td></tr>
+                    <tr><td>20</td><td>(Anonymous)</td><td>Male</td><td>22</td><td>32</td><td>80.0</td><td><span class="score-tag tag-good">Good</span></td></tr>
+                    <tr style="background:#eff6ff;">
+                        <td colspan="5" style="font-weight:700; color:var(--primary);">Mean / Overall</td>
+                        <td style="font-weight:900; color:var(--primary); font-family:'Nunito',sans-serif; font-size:1rem;">63.25</td>
+                        <td><span class="score-tag tag-acceptable">Acceptable</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--text-muted);">
-            * SUS Score = Raw Score × 2.5 &nbsp;|&nbsp; Excellent: ≥80.3 &nbsp;|&nbsp; Good: 68–80.2 &nbsp;|&nbsp; Acceptable: 51–67.9
+            * SUS Score = Raw Score × 2.5 &nbsp;|&nbsp; Excellent: ≥80.3 &nbsp;|&nbsp; Good: 68–80.2 &nbsp;|&nbsp; Acceptable: 51–67.9 &nbsp;|&nbsp; Poor: ≤50.9
         </p>
     </div>
 
+
+    <!-- ══════════════════════════════════════ -->
+    <!--  PER-ITEM RESULTS                     -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Per-Item Results</h2>
     </div>
@@ -199,32 +380,223 @@
     <div class="card">
         <h3>📋 SUS Question Scores (Mean Rating)</h3>
         <div class="table-wrapper" style="margin-top:0.5rem;">
-            
+            <table class="score-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Statement</th>
+                        <th>Type</th>
+                        <th>Mean (1–5)</th>
+                        <th>Contribution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Q1</td>
+                        <td>I think that I would like to use this system frequently.</td>
+                        <td><span class="sev sev-low">Positive</span></td>
+                        <td>3.80</td>
+                        <td>2.80</td>
+                    </tr>
+                    <tr>
+                        <td>Q2</td>
+                        <td>I found the system unnecessarily complex.</td>
+                        <td><span class="sev sev-med">Negative</span></td>
+                        <td>2.55</td>
+                        <td>2.45</td>
+                    </tr>
+                    <tr>
+                        <td>Q3</td>
+                        <td>I thought the system was easy to use.</td>
+                        <td><span class="sev sev-low">Positive</span></td>
+                        <td>3.90</td>
+                        <td>2.90</td>
+                    </tr>
+                    <tr>
+                        <td>Q4</td>
+                        <td>I think that I would need the support of a technical person to use this system.</td>
+                        <td><span class="sev sev-med">Negative</span></td>
+                        <td>3.05</td>
+                        <td>1.95</td>
+                    </tr>
+                    <tr>
+                        <td>Q5</td>
+                        <td>I found the various functions in this system were well integrated.</td>
+                        <td><span class="sev sev-low">Positive</span></td>
+                        <td>4.05</td>
+                        <td>3.05</td>
+                    </tr>
+                    <tr>
+                        <td>Q6</td>
+                        <td>I thought there was too much inconsistency in this system.</td>
+                        <td><span class="sev sev-med">Negative</span></td>
+                        <td>2.85</td>
+                        <td>2.15</td>
+                    </tr>
+                    <tr>
+                        <td>Q7</td>
+                        <td>I would imagine that most people would learn to use this system very quickly.</td>
+                        <td><span class="sev sev-low">Positive</span></td>
+                        <td>3.90</td>
+                        <td>2.90</td>
+                    </tr>
+                    <tr>
+                        <td>Q8</td>
+                        <td>I found the system very cumbersome to use.</td>
+                        <td><span class="sev sev-med">Negative</span></td>
+                        <td>3.00</td>
+                        <td>2.00</td>
+                    </tr>
+                    <tr>
+                        <td>Q9</td>
+                        <td>I felt very confident using the system.</td>
+                        <td><span class="sev sev-low">Positive</span></td>
+                        <td>4.30</td>
+                        <td>3.30</td>
+                    </tr>
+                    <tr>
+                        <td>Q10</td>
+                        <td>I needed to learn a lot of things before I could get going with this system.</td>
+                        <td><span class="sev sev-med">Negative</span></td>
+                        <td>3.20</td>
+                        <td>1.80</td>
+                    </tr>
+                    <tr style="background:#eff6ff;">
+                        <td colspan="4" style="font-weight:700; color:var(--primary);">Total Contribution × 2.5 = SUS Score</td>
+                        <td style="font-weight:900; color:var(--primary); font-family:'Nunito',sans-serif;">25.30 → <strong>63.25</strong></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--text-muted);">
             * For <strong>positive</strong> items, contribution = mean − 1. For <strong>negative</strong> items, contribution = 5 − mean. Total SUS = sum of contributions × 2.5.
         </p>
     </div>
 
-    <!-- Visual bar chart of mean ratings -->
+    <!-- Visual bar chart -->
     <div class="card">
         <h3>📊 Mean Ratings per SUS Item (Visual)</h3>
-        <p style="margin-bottom:1.25rem; font-size:0.88rem;">Bars represent the mean score (1–5 scale) per question. Shaded bars are negative items where a lower score indicates better usability.</p>
+        <p style="margin-bottom:1.25rem; font-size:0.88rem;">Bars show the mean score (1–5 scale) per question. Grey bars are negative items — for these, a <em>lower</em> mean reflects better usability.</p>
 
+        <!-- Q1 -->
+        <div class="bar-row">
+            <div class="bar-label">Q1</div>
+            <div class="bar-track"><div class="bar-fill" style="width:76%;"></div></div>
+            <div class="bar-val">3.80</div>
+        </div>
+        <!-- Q2 negative -->
+        <div class="bar-row">
+            <div class="bar-label">Q2</div>
+            <div class="bar-track"><div class="bar-fill negative" style="width:51%;"></div></div>
+            <div class="bar-val negative">2.55</div>
+        </div>
+        <!-- Q3 -->
+        <div class="bar-row">
+            <div class="bar-label">Q3</div>
+            <div class="bar-track"><div class="bar-fill" style="width:78%;"></div></div>
+            <div class="bar-val">3.90</div>
+        </div>
+        <!-- Q4 negative -->
+        <div class="bar-row">
+            <div class="bar-label">Q4</div>
+            <div class="bar-track"><div class="bar-fill negative" style="width:61%;"></div></div>
+            <div class="bar-val negative">3.05</div>
+        </div>
+        <!-- Q5 -->
+        <div class="bar-row">
+            <div class="bar-label">Q5</div>
+            <div class="bar-track"><div class="bar-fill" style="width:81%;"></div></div>
+            <div class="bar-val">4.05</div>
+        </div>
+        <!-- Q6 negative -->
+        <div class="bar-row">
+            <div class="bar-label">Q6</div>
+            <div class="bar-track"><div class="bar-fill negative" style="width:57%;"></div></div>
+            <div class="bar-val negative">2.85</div>
+        </div>
+        <!-- Q7 -->
+        <div class="bar-row">
+            <div class="bar-label">Q7</div>
+            <div class="bar-track"><div class="bar-fill" style="width:78%;"></div></div>
+            <div class="bar-val">3.90</div>
+        </div>
+        <!-- Q8 negative -->
+        <div class="bar-row">
+            <div class="bar-label">Q8</div>
+            <div class="bar-track"><div class="bar-fill negative" style="width:60%;"></div></div>
+            <div class="bar-val negative">3.00</div>
+        </div>
+        <!-- Q9 -->
+        <div class="bar-row">
+            <div class="bar-label">Q9</div>
+            <div class="bar-track"><div class="bar-fill" style="width:86%;"></div></div>
+            <div class="bar-val">4.30</div>
+        </div>
+        <!-- Q10 negative -->
+        <div class="bar-row">
+            <div class="bar-label">Q10</div>
+            <div class="bar-track"><div class="bar-fill negative" style="width:64%;"></div></div>
+            <div class="bar-val negative">3.20</div>
+        </div>
+
+        <div style="margin-top:1.25rem; display:flex; gap:1.5rem; flex-wrap:wrap; font-size:0.8rem; color:var(--text-muted);">
+            <span><span style="display:inline-block;width:14px;height:10px;border-radius:3px;background:linear-gradient(90deg,var(--primary),#60a5fa);margin-right:5px;vertical-align:middle;"></span> Positive item (higher = better)</span>
+            <span><span style="display:inline-block;width:14px;height:10px;border-radius:3px;background:linear-gradient(90deg,#94a3b8,#cbd5e1);margin-right:5px;vertical-align:middle;"></span> Negative item (lower = better)</span>
+        </div>
+
+        <div class="highlight-box" style="margin-top:1.25rem; background:#eff6ff; border-color:#bfdbfe;">
+            <h4>🔍 Key Observations from Item Analysis</h4>
+            <ul style="margin:0.5rem 0 0; padding-left:1.25rem; font-size:0.88rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.3rem;">
+                <li><strong>Q9 (Confidence)</strong> scored highest (mean 4.30) — users generally felt confident while navigating the system.</li>
+                <li><strong>Q5 (Integration)</strong> scored well (mean 4.05) — features feel cohesive and well-connected.</li>
+                <li><strong>Q4 (Technical Support Needed)</strong> scored 3.05 — many respondents felt they might still need guidance, indicating room for better onboarding.</li>
+                <li><strong>Q8 (Cumbersome)</strong> scored 3.00 — some users found the system burdensome, consistent with the SOS discoverability complaints.</li>
+                <li><strong>Q10 (Learning Curve)</strong> scored 3.20 — a notable number of respondents needed time to understand the system before use.</li>
+            </ul>
+        </div>
     </div>
 
 
+    <!-- ══════════════════════════════════════ -->
+    <!--  KEY ISSUES                           -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Key Issues Identified</h2>
     </div>
 
     <div class="card">
         <h3>⚠️ Usability Issues Found During Testing</h3>
-        <p style="margin-bottom:1rem;">During the heuristic evaluation and usability testing sessions, the following key issues were identified and documented across different usability dimensions.</p>
+        <p style="margin-bottom:1rem;">During the heuristic evaluation and usability testing sessions, the following key issues were identified and documented across different usability dimensions. Issues are tagged by severity based on how frequently they were raised.</p>
 
+        <ul class="issue-list">
+            <li>
+                <span class="issue-icon">🆘</span>
+                <div>
+                    <strong>SOS Button Discoverability <span class="sev sev-high">High Severity</span></strong>
+                    Multiple respondents explicitly reported difficulty finding the SOS/emergency button. Comments included: "I can't find the SOS immediately," "the SOS should be found easily," and "I have a hard time finding it." This is a critical safety feature that must be prominently placed.
+                </div>
+            </li>
+            <li>
+                <span class="issue-icon">⚠️</span>
+                <div>
+                    <strong>No Cancel Confirmation Dialog <span class="sev sev-high">High Severity</span></strong>
+                    One respondent noted: "when I cancel some actions, it immediately goes — I didn't see a warning." The lack of a confirmation prompt when cancelling rides or actions can lead to accidental loss of bookings.
+                </div>
+            </li>
+            <li>
+                <span class="issue-icon">🔘</span>
+                <div>
+                    <strong>Button Functionality Clarity <span class="sev sev-low">Low Severity</span></strong>
+                    One respondent mentioned buttons need to be "sure it actually directs" and should be "easy to understand," suggesting that some interactive elements were unclear in their purpose or response.
+                </div>
+            </li>
+        </ul>
     </div>
 
 
+    <!-- ══════════════════════════════════════ -->
+    <!--  HEURISTIC EVALUATION FINDINGS        -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Heuristic Evaluation Findings</h2>
     </div>
@@ -234,47 +606,135 @@
 
         <div class="member-eval">
             <strong>Brian Al Tenorio — Visibility &amp; User Control</strong>
-   
+            <p>
+                The system generally provides visual feedback during the booking process; however, the current prototype lacks consistent status indicators on certain screens. The SOS/emergency button, a critical user control element, was found to be insufficiently visible and not placed in an immediately accessible location. Additionally, the absence of a cancellation confirmation dialog reduces the user's sense of control — the system should give users the freedom to undo or confirm actions before proceeding irreversibly. It is recommended to implement a persistent status bar, a prominently placed SOS button on the home/booking screens, and confirmation prompts for destructive actions such as cancelling a ride.
+            </p>
         </div>
 
         <div class="member-eval">
             <strong>Shejay Barranda — UI Consistency &amp; Design</strong>
-       
+            <p>
+                The overall visual design is clean and follows a consistent blue color palette, which aligns well with the transportation/mobility theme. Rounded card components and icon usage are applied consistently across most screens. However, minor inconsistencies were observed in button sizing and padding across different screens, and some action labels used slightly different phrasing for similar functions. Font weight hierarchy was found to be effective for guiding user attention on the login and booking screens, but some secondary screens lack sufficient visual differentiation between interactive and non-interactive elements. Standardizing the component library and adopting a stricter style guide would resolve these inconsistencies.
+            </p>
         </div>
 
         <div class="member-eval">
             <strong>Mary Rose Oriana — Error Prevention &amp; Feedback</strong>
+            <p>
+                The prototype showed limited error-prevention mechanisms. Key gaps include: (1) the absence of a confirmation modal when the user attempts to cancel a booked ride; (2) no input validation feedback visible during the sign-up flow when fields are left incomplete; and (3) no pre-booking fare summary that allows users to review costs before confirming. These issues increase the likelihood of user errors and reduce trust in the system. The system should implement inline validation messages, cancellation confirmation dialogs, and a clear fare estimation screen prior to the final booking confirmation step.
+            </p>
         </div>
 
         <div class="member-eval">
             <strong>Christine Joy Saor — Overall Usability &amp; Efficiency</strong>
-           
+            <p>
+                The core booking flow — from login to ride confirmation — is streamlined and requires relatively few steps, which supports task efficiency for experienced users. However, for new users, the lack of onboarding guidance or a walkthrough tutorial creates a learning barrier. The SOS button, while present in the prototype, is not positioned where users intuitively look during or after booking. Task completion during testing was generally successful for the main ride-booking scenario, but users spent more time than necessary on secondary actions such as locating safety features and navigating back from certain screens. Adding a brief onboarding flow, improving the SOS placement, and offering quick-access shortcuts for frequent actions would significantly improve efficiency.
+            </p>
         </div>
     </div>
 
 
+    <!-- ══════════════════════════════════════ -->
+    <!--  QUALITATIVE FEEDBACK                 -->
+    <!-- ══════════════════════════════════════ -->
+    <div class="section-divider" style="margin-top:2.5rem;">
+        <h2 class="section-title">Qualitative Feedback</h2>
+    </div>
+
+    <div class="card">
+        <h3>💬 What Did Respondents Like?</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted);">The following are selected responses from respondents about what they appreciated about the Sakay Partido system:</p>
+        <ul class="quote-list">
+            <li>"Very convenient app and easy to use."</li>
+            <li>"I like that the system helps commuters easily find available transportation, especially for passengers who live far from terminals."</li>
+            <li>"It saves time since I no longer need to ask around or wait long just to get transport details."</li>
+            <li>"It helps people commute more efficiently and safely, especially for those traveling to different areas and wanted to explore Partido."</li>
+            <li>"Overall I like it especially since I'm a commuter."</li>
+            <li>"It's very convenient to use this system."</li>
+            <li>"The system itself is pretty good — it would be convenient for people who do not have anyone to fetch them. Considering that we don't have a system like that here, that would be very effective to use."</li>
+            <li>"I like this because there is no app like Angkas in the Partido area."</li>
+            <li>"It is easy to use and convenient for passengers."</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>🛠️ What Improvements Were Suggested?</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted);">The following are selected improvement suggestions gathered from respondents:</p>
+        <ul class="quote-list">
+            <li>"Make things (like buttons) easy to understand and ensure they are functional. When booking a ride, the SOS should be activated automatically so it won't be missed."</li>
+            <li>"Add a fare estimation feature so passengers/users can see the expected payment before booking."</li>
+            <li>"The SOS should be easy to find — I had a hard time locating it."</li>
+            <li>"When cancelling actions, a warning or confirmation message should appear first."</li>
+            <li>"If I need emergency help immediately, I can't find the SOS button quickly enough."</li>
+        </ul>
+    </div>
+
+
+    <!-- ══════════════════════════════════════ -->
+    <!--  DISCUSSION                           -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Discussion</h2>
     </div>
 
     <div class="card">
         <h3>💬 Interpretation of Results</h3>
-    
+        <p>
+            The overall mean SUS score of <strong>63.25</strong> places the Sakay Partido prototype within the <strong>"Acceptable"</strong> usability range (51–67.9) based on the standard SUS grading scale. While this indicates that the system is generally usable, it falls short of the "Good" (≥68) threshold, suggesting that meaningful improvements are still needed before the system is ready for broader deployment.
+        </p>
+        <p>
+            The high score on Q9 (mean 4.30 — "I felt very confident using the system") and Q5 (mean 4.05 — "The functions were well integrated") suggests that the overall design structure and feature set are intuitive and coherent. Respondents who are regular commuters and smartphone users found the core concept immediately relatable, which contributed to their confidence. The positive qualitative responses consistently praised the app's convenience and its potential to solve a real gap in local transportation — the absence of ride-hailing apps in the Partido area.
+        </p>
+        <p>
+            However, lower contributions from Q4 (Technical Support, contribution 1.95) and Q10 (Learning Curve, contribution 1.80) reveal that a notable portion of respondents felt the system required more effort to learn than expected. The wide standard deviation of <strong>15.37</strong> further indicates highly varied user experiences — some users rated the system as Excellent (85.0) while others gave Poor scores (37.5). This polarization likely stems from differences in prior familiarity with similar ride-hailing apps and the varying degree of difficulty in locating secondary features like the SOS button.
+        </p>
+        <p>
+            The most consistent issue raised — the SOS button discoverability — is a significant usability and safety concern. In a transportation context, emergency features must be immediately accessible without requiring users to search for them. Addressing this single issue may have the largest positive impact on the overall SUS score in a subsequent evaluation. Similarly, the lack of onboarding guidance for first-time users and the absence of a fare estimation screen are gaps that are well-documented best practices in ride-hailing application design.
+        </p>
+        <p>
+            In summary, the results suggest that Sakay Partido has a strong conceptual foundation and addresses a genuine local need, but the prototype requires targeted improvements in safety feature accessibility, error prevention, onboarding, and pricing transparency to achieve a "Good" or "Excellent" SUS rating in future evaluations.
+        </p>
     </div>
 
 
+    <!-- ══════════════════════════════════════ -->
+    <!--  RECOMMENDATIONS                      -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Recommendations</h2>
     </div>
 
     <div class="card">
         <h3>✅ Recommendations for Improving the Prototype</h3>
-        <p style="margin-bottom:1rem;">Based on the SUS scores, heuristic evaluation findings, and qualitative feedback from respondents, the following improvements are recommended for the next version of the Sakay Partido prototype.</p>
+        <p style="margin-bottom:1rem;">Based on the SUS scores, heuristic evaluation findings of us(Sakay Patido Development Team), and qualitative feedback from respondents, the following improvements are recommended for the next version of the Sakay Partido prototype.</p>
 
         <div class="rec-grid">
-</div>
+            <div class="rec-item">
+                <div class="rec-icon">🆘</div>
+                <h4>Relocate the SOS Button</h4>
+                <p>Place the SOS/emergency button in a fixed, always-visible location (e.g., top right of the home page) so users can access it instantly.</p>
+            </div>
+            <div class="rec-item">
+                <div class="rec-icon">📍</div>
+                <h4>Make the Location Access Mandatory</h4>
+                <p>Make the Location Access mandatory for the users to use the app for real-time tracking of drivers and their location.</p>
+            </div>
+            <div class="rec-item">
+                <div class="rec-icon">🚫</div>
+                <h4>Add Cancel Confirmation Dialog</h4>
+                <p>Implement a confirmation modal whenever the user attempts to cancel a ride or perform a destructive action. This prevents accidental cancellations and improves user control.</p>
+            </div>
+            <div class="rec-item">
+                <div class="rec-icon">🔘</div>
+                <h4>Improve Button Labeling &amp; Clarity</h4>
+                <p>Ensure all buttons use clear, action-oriented labels. Avoid ambiguous icons without text. Provide hover/tap states to confirm user interaction.</p>
+            </div>
+        </div>
     </div>
 
+    <!-- ══════════════════════════════════════ -->
+    <!--  DESIGN IMPROVEMENTS                  -->
+    <!-- ══════════════════════════════════════ -->
     <div class="section-divider" style="margin-top:2.5rem;">
         <h2 class="section-title">Suggested Design Improvements</h2>
     </div>
@@ -283,6 +743,37 @@
         <h3>🎨 Design-Level Enhancements</h3>
         <p style="margin-bottom:1.25rem;">Beyond functional fixes, the following design-level changes are suggested to elevate the user interface quality and align the prototype more closely with established mobile UX standards.</p>
 
+        <div class="steps-list">
+            <div class="step-item">
+                <div class="step-num">1</div>
+                <div class="step-body" style="flex:1;">
+                    <h4>SOS Emergency Access</h4>
+                    <p>Adding SOS button in Homepage can solve the issue of having a hard time finding it. A prominently colored (red) SOS emergency button should remain accessible at all times during an active ride session. This directly addresses the most frequently told usability concern.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">2</div>
+                <div class="step-body" style="flex:1;">
+                    <h4>Consistent Component Library</h4>
+                    <p>Standardize button sizes, padding, and typography across all screens. Define a shared component set (primary button, secondary button, input fields, cards) so every screen feels cohesive. This addresses the inconsistency noted in the heuristic evaluation.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">3</div>
+                <div class="step-body" style="flex:1;">
+                    <h4>Mandatory Location Access</h4>
+                    <p>Making the Location Access mandatory for the users to use the app for real-time tracking of drivers and their location.</p>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">4</div>
+                <div class="step-body" style="flex:1;">
+                    <h4>Error Handling Messages</h4>
+                    <p>Putting a clear and concise error handling messages to  Cancel Booking and Saving a Place based on each members heuristic evaluation and the respondents usability evaluation.</p>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </main>
