@@ -488,6 +488,22 @@
         hamburger.classList.toggle('open');
         mobileNav.classList.toggle('open');
     });
+
+    /* ─── PDF Viewer ─── */
+    function togglePdf(header) {
+        const body = header.nextElementSibling;
+        const icon = header.querySelector('.pdf-toggle-icon');
+        body.classList.toggle('open');
+        icon.classList.toggle('rotated');
+    }
+
+    function switchTab(tabBtn, targetId) {
+        tabBtn.closest('.pdf-tabs').querySelectorAll('.pdf-tab-btn').forEach(b => b.classList.remove('active'));
+        tabBtn.classList.add('active');
+        const block = tabBtn.closest('.pdf-body');
+        block.querySelectorAll('.pdf-frame-wrap').forEach(f => f.style.display = 'none');
+        block.querySelector('#' + targetId).style.display = 'block'
+        }
 </script>
 </body>
 </html>
