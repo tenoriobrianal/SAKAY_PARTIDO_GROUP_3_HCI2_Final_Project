@@ -33,7 +33,17 @@
             </div>
         </div>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html">🏠 Home</a>
+    <a href="data-gathering.html"  class="active">📋 Data Gathering</a>
+    <a href="result.html">📊 Results &amp; Discussion</a>
+    <a href="reflection.html">💭 Reflection</a>
+    <a href="prototype.html">📱 Prototype Walkthrough</a>
+</div>
 
 <!-- ─── HEADER ─── -->
 <div class="page-header">
@@ -463,33 +473,21 @@
 <script>
     const btn = document.getElementById('moreBtn');
     const menu = document.getElementById('dropdownMenu');
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         btn.classList.toggle('open');
         menu.classList.toggle('open');
     });
-    document.addEventListener('click', (e) => {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            btn.classList.remove('open');
-            menu.classList.remove('open');
-        }
+    document.addEventListener('click', () => {
+        btn.classList.remove('open');
+        menu.classList.remove('open');
     });
-
-    function togglePdf(header) {
-        const body = header.nextElementSibling;
-        const icon = header.querySelector('.pdf-toggle-icon');
-        body.classList.toggle('open');
-        icon.classList.toggle('rotated');
-    }
-
-    function switchTab(tabBtn, targetId) {
-        // Deactivate all sibling tab buttons
-        tabBtn.closest('.pdf-tabs').querySelectorAll('.pdf-tab-btn').forEach(b => b.classList.remove('active'));
-        tabBtn.classList.add('active');
-        // Hide all pdf frames in this block, show target
-        const block = tabBtn.closest('.pdf-body');
-        block.querySelectorAll('.pdf-frame-wrap').forEach(f => f.style.display = 'none');
-        block.querySelector('#' + targetId).style.display = 'block';
-    }
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open');
+    });
 </script>
 </body>
 </html>

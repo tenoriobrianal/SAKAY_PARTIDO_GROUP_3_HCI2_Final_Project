@@ -21,7 +21,7 @@
         <a href="data-gathering.html">Data Gathering</a>
         <a href="result.html">Results &amp; Discussion</a>
         <div class="dropdown">
-            <button class="dropdown-btn open" id="moreBtn">
+            <button class="dropdown-btn" id="moreBtn">
                 More
                 <svg viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
@@ -33,7 +33,17 @@
             </div>
         </div>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html">🏠 Home</a>
+    <a href="data-gathering.html">📋 Data Gathering</a>
+    <a href="result.html">📊 Results &amp; Discussion</a>
+    <a href="reflection.html" class="active">💭 Reflection</a>
+    <a href="prototype.html">📱 Prototype Walkthrough</a>
+</div>
 
 <!-- ─── HEADER ─── -->
 <div class="page-header">
@@ -56,7 +66,7 @@
             <div class="author-avatar">BAT</div>
             <div class="author-info">
                 <strong>Brian Al Tenorio</strong>
-                <span>Project Leader</span>
+                <span>Project Leader — Data Analyst / Documenter</span>
             </div>
         </div>
         
@@ -68,7 +78,7 @@
             <div class="author-avatar">SB</div>
             <div class="author-info">
                 <strong>Shejay Barranda</strong>
-                <span>UI/UX Designer</span>
+                <span>Member - UI/UX Designer</span>
             </div>
         </div>
     </div>
@@ -79,7 +89,7 @@
             <div class="author-avatar">MRO</div>
             <div class="author-info">
                 <strong>Mary Rose Oriana</strong>
-                <span>Backend Developer</span>
+                <span>Member - Prototype Presenter / Data Gatherer</span>
             </div>
         </div>
     </div>
@@ -90,7 +100,7 @@
             <div class="author-avatar">CJS</div>
             <div class="author-info">
                 <strong>Christine Joy Saor</strong>
-                <span>Tester</span>
+                <span>Member - Documenter</span>
             </div>
         </div>
     </div>
@@ -113,18 +123,20 @@
 <script>
     const btn = document.getElementById('moreBtn');
     const menu = document.getElementById('dropdownMenu');
-    // keep dropdown looking active but closed by default
-    btn.classList.remove('open');
-
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         btn.classList.toggle('open');
         menu.classList.toggle('open');
     });
-    document.addEventListener('click', (e) => {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            btn.classList.remove('open');
-            menu.classList.remove('open');
-        }
+    document.addEventListener('click', () => {
+        btn.classList.remove('open');
+        menu.classList.remove('open');
+    });
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open');
     });
 </script>
 </body>

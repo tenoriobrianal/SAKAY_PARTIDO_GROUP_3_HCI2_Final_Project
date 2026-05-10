@@ -16,6 +16,8 @@
         </div>
         <h2>Sakay Partido</h2>
     </a>
+
+    <!-- Desktop links -->
     <div class="nav-links">
         <a href="index.html" class="active">Home</a>
         <a href="data-gathering.html">Data Gathering</a>
@@ -33,7 +35,21 @@
             </div>
         </div>
     </div>
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
+
+<!-- Mobile nav drawer -->
+<div class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="active">🏠 Home</a>
+    <a href="data-gathering.html">📋 Data Gathering</a>
+    <a href="result.html">📊 Results &amp; Discussion</a>
+    <a href="reflection.html">💭 Reflection</a>
+    <a href="prototype.html">📱 Prototype Walkthrough</a>
+</div>
 
 <!-- ─── HERO ─── -->
 <div class="page-header">
@@ -59,7 +75,7 @@
         </div>
     </div>
 
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:1rem; margin-bottom:2.5rem;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin-bottom:2.5rem;">
         <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
             <div style="font-size:1.8rem; flex-shrink:0;">🎯</div>
             <div>
@@ -71,7 +87,7 @@
             <div style="font-size:1.8rem; flex-shrink:0;">👥</div>
             <div>
                 <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">Respondents</h3>
-                <p style="font-size:0.87rem;">3rd year students of Bachelor of Science in Office Administration (BSOA), from Partido State University, from , experienced in using smartphones and commuting daily.</p>
+                <p style="font-size:0.87rem;">3rd year students of Bachelor of Science in Office Administration (BSOA), from Partido State University, experienced in using smartphones and commuting daily.</p>
             </div>
         </div>
         <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
@@ -102,7 +118,7 @@
             <div class="member-role">Member - UI/UX Designer</div>
         </div>
         <div class="member-card">
-            <img src= "MR Oriana.jpg" alt="MRO" class="member-image"
+            <img src="MR Oriana.jpg" alt="MRO" class="member-image"
                  onerror="this.outerHTML='<div class=\'member-image fallback\'>MRO</div>'">
             <div class="member-name">Mary Rose Oriana</div>
             <div class="member-role">Member - Prototype Presenter / Data Gatherer</div>
@@ -135,17 +151,25 @@
 </footer>
 
 <script>
+    // Desktop dropdown
     const btn = document.getElementById('moreBtn');
     const menu = document.getElementById('dropdownMenu');
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         btn.classList.toggle('open');
         menu.classList.toggle('open');
     });
-    document.addEventListener('click', (e) => {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            btn.classList.remove('open');
-            menu.classList.remove('open');
-        }
+    document.addEventListener('click', () => {
+        btn.classList.remove('open');
+        menu.classList.remove('open');
+    });
+
+    // Mobile hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open');
     });
 </script>
 </body>
