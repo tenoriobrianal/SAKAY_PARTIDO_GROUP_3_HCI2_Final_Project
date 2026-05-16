@@ -139,23 +139,31 @@
 </footer>
 
 <script>
-    const btn = document.getElementById('moreBtn');
+    const btn  = document.getElementById('moreBtn');
     const menu = document.getElementById('dropdownMenu');
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        btn.classList.toggle('open');
-        menu.classList.toggle('open');
-    });
-    document.addEventListener('click', () => {
-        btn.classList.remove('open');
-        menu.classList.remove('open');
-    });
+
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    const morePages   = ['reflection.html', 'prototype.html'];
+    if (morePages.includes(currentPage)) {
+        btn.classList.add('active');
+    }
+
+    btn.addEventListener('click', e => { e.stopPropagation(); btn.classList.toggle('open'); menu.classList.toggle('open'); });
+    document.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); });
+
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('open');
-        mobileNav.classList.toggle('open');
-    });
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
 </script>
+
+<style>
+    .dropdown-btn.active {
+        color: var(--primary, #3b82f6) !important;
+        font-weight: 700;
+    }
+    .dropdown-btn.active svg {
+        color: var(--primary, #3b82f6);
+    }
+</style>
 </body>
 </html>
