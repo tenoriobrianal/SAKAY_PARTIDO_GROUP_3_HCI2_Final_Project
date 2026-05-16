@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakay Partido – Prototype Walkthrough</title>
+    <title>Prototype Walkthrough – Sakay Partido</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* ── Section divider (same as index.html) ── */
         .section-divider {
             display: flex;
             align-items: center;
@@ -19,123 +20,168 @@
             background: linear-gradient(to right, var(--primary, #3b82f6), transparent);
             border-radius: 99px;
         }
-        .section-title {
-            white-space: nowrap;
-        }
-    </style>
-    <style>
-        /* Walkthrough screen frames */
-        .screens-row {
+        .section-title { white-space: nowrap; }
+
+        /* ── Intro banner ── */
+        .proto-intro {
+            background: linear-gradient(135deg, #e8f0fe 0%, #f0f7ff 100%);
+            border: 1px solid #c7d9f8;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
             display: flex;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+        .proto-intro .icon-big { font-size: 2.4rem; flex-shrink: 0; }
+        .proto-intro p { margin: 0; color: #374151; font-size: 0.95rem; line-height: 1.7; }
+        .proto-intro strong { color: #1d4ed8; }
+
+        /* ── Flow section header ── */
+        .flow-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary, #3b82f6);
+            color: #fff;
+            padding: 0.3rem 1rem;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        /* ── Screen card ── */
+        .screen-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1.5rem;
-            margin: 1.5rem 0 2.5rem;
-            justify-content: center;
+            margin-bottom: 3rem;
         }
-
-        .screen-frame {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            padding: 1.25rem 1rem 1rem;
-            width: 200px;
-            transition: all 0.25s;
-        }
-
-        .screen-frame:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-            border-color: var(--primary-light);
-        }
-
-        .screen-frame img {
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-        }
-
-        .screen-frame .screen-placeholder {
-            width: 100%;
-            height: 280px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+        .screen-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
             display: flex;
             flex-direction: column;
-            align-items: center;
+        }
+        .screen-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(59,130,246,0.15);
+        }
+
+        /* phone-frame wrapper — fixed height, no cropping on any screen */
+        .phone-frame {
+            background: #f3f4f6;
+            display: flex;
             justify-content: center;
-            color: var(--primary);
-            font-size: 2rem;
-            border: 1px dashed var(--primary-light);
+            align-items: center;
+            padding: 1.25rem 1.25rem 0.75rem;
+            height: 320px;
+        }
+        .phone-frame img {
+            max-width: 155px;
+            max-height: 290px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 22px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+            display: block;
+        }
+        /* Screen 5 is a small bottom-sheet snippet — give it a blue
+           app-matching background so it sits nicely in the same frame */
+        .phone-frame.partial {
+            background: linear-gradient(160deg, #1e56d0 0%, #3b82f6 55%, #7eb8f7 100%);
+            border-radius: 0;
+        }
+        .phone-frame.partial img {
+            max-width: 220px;
+            max-height: 200px;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.25);
         }
 
-        .screen-frame .screen-placeholder span {
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.78rem;
+        .screen-body {
+            padding: 1rem 1.25rem 1.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .screen-num {
+            font-size: 0.72rem;
             font-weight: 700;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
+            color: #9ca3af;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
-
-        .screen-frame .screen-label {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 800;
-            font-size: 0.85rem;
-            color: var(--dark);
-            margin-top: 0.75rem;
+        .screen-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #111827;
+            line-height: 1.3;
         }
-
-        .screen-frame .screen-desc {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+        .screen-desc {
+            font-size: 0.84rem;
+            color: #4b5563;
+            line-height: 1.65;
             margin-top: 0.25rem;
         }
 
-        /* Feature grid */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0 2rem;
+        /* badge chips on some cards */
+        .screen-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 0.6rem;
         }
-
-        .feature-item {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.25rem;
-            box-shadow: var(--shadow);
+        .badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+            border-radius: 99px;
+            padding: 0.15rem 0.65rem;
+            font-size: 0.72rem;
+            font-weight: 600;
         }
+        .badge.green  { background:#f0fdf4; color:#15803d; border-color:#bbf7d0; }
+        .badge.red    { background:#fff1f2; color:#be123c; border-color:#fecdd3; }
+        .badge.orange { background:#fff7ed; color:#c2410c; border-color:#fed7aa; }
+        .badge.purple { background:#faf5ff; color:#7e22ce; border-color:#e9d5ff; }
 
-        .feature-item .feat-icon {
+        /* flow connector arrow between groups */
+        .flow-arrow {
+            text-align: center;
             font-size: 1.6rem;
-            margin-bottom: 0.5rem;
+            color: var(--primary, #3b82f6);
+            margin: -0.5rem 0 1.5rem;
+            opacity: 0.5;
         }
 
-        .feature-item h4 {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 800;
-            color: var(--dark);
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
+        @media (max-width: 600px) {
+            .screen-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .phone-frame img { width: 120px; }
+            .proto-intro { flex-direction: column; }
         }
-
-        .feature-item p {
-            font-size: 0.82rem;
-            color: var(--text-muted);
-            margin: 0;
-            text-align: left;
+        @media (max-width: 380px) {
+            .screen-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-
+<!-- ─── NAV ─── -->
 <nav>
     <a class="logo-container" href="index.html">
         <div class="logo-circle">
-            <img src="Logo.png" alt="Sakay Partido Logo">
+            <img src="images/Logo.png" alt="Sakay Partido Logo">
         </div>
         <h2>Sakay Partido</h2>
     </a>
@@ -152,7 +198,7 @@
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
                 <a href="reflection.html"><span class="icon">💭</span> Reflection</a>
-                <a href="prototype.html" style="background:#eff6ff; color:var(--primary);"><span class="icon">📱</span> Prototype Walkthrough</a>
+                <a href="prototype.html" class="active"><span class="icon">📱</span> Prototype Walkthrough</a>
             </div>
         </div>
     </div>
@@ -160,187 +206,394 @@
         <span></span><span></span><span></span>
     </button>
 </nav>
+
+<!-- Mobile drawer -->
 <div class="mobile-nav" id="mobileNav">
     <a href="index.html">🏠 Home</a>
     <a href="data-gathering.html">📋 Data Gathering</a>
     <a href="result.html">📊 Results &amp; Discussion</a>
     <a href="reflection.html">💭 Reflection</a>
-    <a href="prototype.html"  class="active">📱 Prototype Walkthrough</a>
+    <a href="prototype.html" class="active">📱 Prototype Walkthrough</a>
 </div>
 
-<!-- ─── HEADER ─── -->
+<!-- ─── HERO ─── -->
 <div class="page-header">
-    <div class="tag">Prototype</div>
+    <div class="tag">Screen-by-Screen Walkthrough</div>
     <h1>Prototype Walkthrough</h1>
-    <p>A guided tour of the Sakay Partido mobile application screens and key features.</p>
+    <p>Explore every screen of Sakay Partido — from onboarding to ride completion — with detailed descriptions of each interface.</p>
 </div>
 
 <!-- ─── MAIN ─── -->
 <main>
 
-    <!-- OVERVIEW -->
-    <div class="info-strip">
+    <!-- Intro -->
+    <div class="proto-intro">
         <div class="icon-big">📱</div>
         <div>
-            <h3>About the Prototype</h3>
-            <p>Sakay Partido is a mobile-first application built to connect commuters at Partido, Camarines Sur with nearby motorcycle (door-to-door) and tricycle drivers. The prototype was developed for usability testing and covers the core booking flow from login to ride completion.</p>
+            <p>The <strong>Sakay Partido</strong> prototype consists of <strong>16 screens</strong> covering the complete user journey — authentication, ride booking, live tracking, payment, and emergency safety features. Each screen was designed for motorcycle and tricycle commuters in the <strong>Partido area, Camarines Sur</strong>. The walkthrough below is organized by user flow.</p>
         </div>
     </div>
 
-    <!-- KEY FEATURES -->
+    <!-- ══ FLOW 1: ONBOARDING ══ -->
     <div class="section-divider">
-        <h2 class="section-title">Key Features</h2>
+        <h2 class="section-title">Flow 1 — Onboarding</h2>
     </div>
+    <div class="flow-label">🚀 Getting Started</div>
 
-    <div class="feature-grid">
-        <div class="feature-item">
-            <div class="feat-icon">🔐</div>
-            <h4>Secure Login</h4>
-            <p>Phone number and password authentication with a "Remember Me" option for convenience.</p>
-        </div>
-        <div class="feature-item">
-            <div class="feat-icon">🛵</div>
-            <h4>Ride Type Selection</h4>
-            <p>Choose between motorcycle (door-to-door) or tricycle services based on your needs.</p>
-        </div>
-        <div class="feature-item">
-            <div class="feat-icon">📍</div>
-            <h4>Route Finder</h4>
-            <p>Set your pickup and drop-off points easily within the Partido area.</p>
-        </div>
-        <div class="feature-item">
-            <div class="feat-icon">⚡</div>
-            <h4>Quick Booking</h4>
-            <p>Book a ride in just a few taps with a streamlined, minimal-step interface.</p>
-        </div>
-        <div class="feature-item">
-            <div class="feat-icon">📋</div>
-            <h4>Ride Summary</h4>
-            <p>Clear confirmation screen showing driver info, route, and estimated fare before confirming.</p>
-        </div>
-        <div class="feature-item">
-            <div class="feat-icon">👤</div>
-            <h4>User Profile</h4>
-            <p>Manage personal information and view ride preferences from your profile page.</p>
-        </div>
-    </div>
+    <div class="screen-grid">
 
-    <!-- SCREEN-BY-SCREEN WALKTHROUGH -->
-    <div class="section-divider" style="margin-top:1rem;">
-        <h2 class="section-title">Screen-by-Screen Walkthrough</h2>
-    </div>
-
-    <!-- Login Screen -->
-    <div class="steps-list">
-
-        <div class="step-item">
-            <div class="step-num">1</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Splash / Welcome Screen</h4>
-                <p>The app opens with the Sakay Partido logo and a brief animation before directing users to the login screen. The splash screen reinforces brand identity with the blue color palette.</p>
+        <!-- Screen 1 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/1_SplashScreen.png" alt="Splash Screen"
+                     onerror="this.style.background='#3b82f6'">
             </div>
-        </div>
-
-        <div class="step-item">
-            <div class="step-num">2</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Login Screen</h4>
-                <p>Users enter their registered phone number and password. A "Remember Me" toggle and "Forgot Password" link are provided for convenience. New users can tap "Sign Up" at the bottom. The login screen is illustrated in the prototype screenshot below.</p>
-                <div style="margin-top:1rem; text-align:center;">
-                    <img src="1.png" alt="Login Screen" style="max-width:200px; border-radius:12px; box-shadow:var(--shadow-lg); border:1px solid var(--border);">
-                    <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.5rem; font-style:italic;">Login Screen — Sakay Partido Prototype</p>
+            <div class="screen-body">
+                <div class="screen-num">Screen 01</div>
+                <div class="screen-name">Splash Screen</div>
+                <div class="screen-desc">The app opens with a full-screen blue gradient and the Sakay Partido logo centered in a white circle. The tagline <em>"Let's Go!"</em> appears below, giving riders an energetic, welcoming first impression before the app loads.</div>
+                <div class="screen-badges">
+                    <span class="badge">Branding</span>
+                    <span class="badge">App Launch</span>
                 </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">3</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Registration / Sign Up</h4>
-                <p>New users provide their name, phone number, and create a password. Input validation ensures all fields meet requirements before allowing registration. A confirmation message is shown upon successful account creation.</p>
+        <!-- Screen 2 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/2_LogIn.png" alt="Login Screen"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 02</div>
+                <div class="screen-name">Log In</div>
+                <div class="screen-desc">Returning users enter their registered <strong>phone number</strong> and <strong>password</strong>. A "Remember me" checkbox reduces friction for daily commuters, while a "Forgot Password?" link ensures account recovery is always accessible. A "Sign up" link guides new users seamlessly.</div>
+                <div class="screen-badges">
+                    <span class="badge">Authentication</span>
+                    <span class="badge green">Returning Users</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">4</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Home / Dashboard</h4>
-                <p>After login, users land on the main dashboard which displays available ride types — Motorcycle and Tricycle. Quick-access buttons let users immediately start a booking. The dashboard also shows recent ride history if available.</p>
+        <!-- Screen 3 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/3_SIgnUp.png" alt="Sign Up Screen"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 03</div>
+                <div class="screen-name">Sign Up / Create Account</div>
+                <div class="screen-desc">New users fill in their <strong>full name</strong>, <strong>phone number</strong>, an optional email, and a password. The Terms of Service and Privacy Policy checkboxes ensure informed consent. Email is marked optional, lowering the barrier for users who only have a phone number.</div>
+                <div class="screen-badges">
+                    <span class="badge">Registration</span>
+                    <span class="badge green">New Users</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">5</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Ride Type Selection</h4>
-                <p>Users choose between Motorcycle (door-to-door) or Tricycle. Each option displays an icon, brief description, and estimated availability in the area. This step ensures users pick the right transport mode for their needs.</p>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <!-- ══ FLOW 2: BOOKING ══ -->
+    <div class="section-divider">
+        <h2 class="section-title">Flow 2 — Booking a Ride</h2>
+    </div>
+    <div class="flow-label">🗺️ Find &amp; Book</div>
+
+    <div class="screen-grid">
+
+        <!-- Screen 4 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/4_Home_Page.png" alt="Home Page"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 04</div>
+                <div class="screen-name">Home Page</div>
+                <div class="screen-desc">The main hub shows a live map of the <strong>Partido area</strong> with the user's current location pinned. A "Where to?" panel slides up from the bottom. The top bar displays the SOS button and notifications, while the bottom navigation provides quick access to Bookings, Places, Wallet, and Profile.</div>
+                <div class="screen-badges">
+                    <span class="badge">Live Map</span>
+                    <span class="badge">Navigation Hub</span>
+                    <span class="badge red">SOS Access</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">6</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Set Pickup &amp; Drop-off Location</h4>
-                <p>Users type or select their pickup and destination points. The interface is designed for the Partido State University area, with common locations pre-suggested for faster input.</p>
+        <!-- Screen 5 -->
+        <div class="screen-card">
+            <div class="phone-frame partial">
+                <img src="images/screens/5_PickUpDropOff.png" alt="Pickup Dropoff"
+                     onerror="this.src='https://via.placeholder.com/200x180/3b82f6/ffffff?text=PickUp+%26+Drop-Off'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 05</div>
+                <div class="screen-name">Pick-Up &amp; Drop-Off</div>
+                <div class="screen-desc">Users confirm their <strong>pickup location</strong> (auto-detected as Current) and select a <strong>destination</strong> from their saved places or by typing. The "Saved Places" dropdown lets frequent commuters quickly pick Home, Work, or favorites — cutting booking time significantly.</div>
+                <div class="screen-badges">
+                    <span class="badge">Location Input</span>
+                    <span class="badge green">Saved Places</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">7</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Booking Confirmation</h4>
-                <p>A summary screen shows the selected ride type, pickup, destination, and estimated fare. Users confirm the booking by tapping the "Book Now" button. A confirmation dialog appears to prevent accidental bookings.</p>
+        <!-- Screen 6 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/6_ChooseRide.png" alt="Choose Ride"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 06</div>
+                <div class="screen-name">Choose a Ride</div>
+                <div class="screen-desc">Two ride options are presented: <strong>Motor (Door-to-Door)</strong> at ₱30 for solo riders with a 3-min wait, and <strong>Tricycle</strong> at ₱20 for 2–3 passengers with a 5-min wait. Distance and estimated travel time (12.5 km · 25 min) are shown at the top, helping users make an informed choice.</div>
+                <div class="screen-badges">
+                    <span class="badge orange">₱30 Motor</span>
+                    <span class="badge green">₱20 Tricycle</span>
+                    <span class="badge">Fare Comparison</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">8</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Waiting for Driver</h4>
-                <p>After booking, users see a status screen indicating that the system is searching for an available driver. A cancel option is available in case the user changes their mind.</p>
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <!-- ══ FLOW 3: RIDE ══ -->
+    <div class="section-divider">
+        <h2 class="section-title">Flow 3 — During the Ride</h2>
+    </div>
+    <div class="flow-label">🛵 Live Ride Experience</div>
+
+    <div class="screen-grid">
+
+        <!-- Screen 7 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/7_DriverFound.png" alt="Driver Found"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 07</div>
+                <div class="screen-name">Driver Found</div>
+                <div class="screen-desc">A confirmation banner announces the matched driver. The rider sees the driver's <strong>name, star rating, trip count</strong>, and vehicle plate. Quick <strong>Call</strong> and <strong>Message</strong> buttons allow direct contact. Trip details (pickup, destination, fare) are summarized, and a Safety Features notice confirms live monitoring is active.</div>
+                <div class="screen-badges">
+                    <span class="badge">Driver Info</span>
+                    <span class="badge red">SOS Active</span>
+                    <span class="badge green">Safety Monitor</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">9</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Driver Matched / Ride Details</h4>
-                <p>Once a driver is matched, the app displays driver name, contact number, vehicle description, and estimated arrival time. Users can call or message the driver directly from this screen.</p>
+        <!-- Screen 8 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/8_RideProgress.png" alt="Ride Progress"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 08</div>
+                <div class="screen-name">Ride in Progress</div>
+                <div class="screen-desc">A <strong>live progress bar</strong> at the top tracks the journey in real time alongside a countdown timer. The map updates dynamically as the driver moves. Rider info, call/message actions, and fare remain visible throughout. The prominent SOS button stays accessible throughout the ride for immediate emergency response.</div>
+                <div class="screen-badges">
+                    <span class="badge">Live Tracking</span>
+                    <span class="badge">Progress Bar</span>
+                    <span class="badge red">SOS</span>
+                </div>
             </div>
         </div>
 
-        <div class="step-item">
-            <div class="step-num">10</div>
-            <div class="step-body" style="flex:1;">
-                <h4>Ride Completion</h4>
-                <p>After the ride, the app shows a completion screen with a ride summary and a prompt to rate the experience. This closes the feedback loop and helps maintain service quality.</p>
+        <!-- Screen 9 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/9_ArrivedLocation.png" alt="Arrived"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 09</div>
+                <div class="screen-name">Arrived at Destination</div>
+                <div class="screen-desc">A congratulatory toast confirms arrival. A modal then presents <strong>three payment options</strong>: Cash (pay driver directly), SakayPartido Wallet (balance shown), or GCash. The total fare (₱30) and route summary are prominently displayed, letting the rider confirm payment before the trip closes.</div>
+                <div class="screen-badges">
+                    <span class="badge green">Ride Complete</span>
+                    <span class="badge">Cash</span>
+                    <span class="badge purple">Wallet</span>
+                    <span class="badge green">GCash</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 10 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/10_DriverRating.png" alt="Driver Rating"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 10</div>
+                <div class="screen-name">Rate Your Driver</div>
+                <div class="screen-desc">After payment, users rate their experience with the driver using a <strong>5-star system</strong>. An optional text field captures additional feedback. A "Skip" button respects users who don't wish to rate, while "Submit Rating" contributes to the driver's reliability score on the platform.</div>
+                <div class="screen-badges">
+                    <span class="badge orange">Star Rating</span>
+                    <span class="badge">Feedback</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 11 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/11_CompleteRide.png" alt="Complete Ride"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 11</div>
+                <div class="screen-name">Complete Ride Summary</div>
+                <div class="screen-desc">The full trip is shown on the map with both pins visible (Goa → Lagonoy). Driver details, fare (₱30), and safety status are displayed one final time. A prominent green <strong>"Complete Ride"</strong> button closes the session and returns the user to the home screen ready for the next booking.</div>
+                <div class="screen-badges">
+                    <span class="badge green">Trip Summary</span>
+                    <span class="badge">End Session</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="flow-arrow">↓</div>
+
+    <!-- ══ FLOW 4: EXTRAS ══ -->
+    <div class="section-divider">
+        <h2 class="section-title">Flow 4 — App Features</h2>
+    </div>
+    <div class="flow-label">⚙️ Additional Screens</div>
+
+    <div class="screen-grid">
+
+        <!-- Screen 12 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/12_BookingsPage.png" alt="Bookings Page"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 12</div>
+                <div class="screen-name">My Bookings</div>
+                <div class="screen-desc">A tabbed view organizes trips into <strong>Active</strong>, <strong>Scheduled</strong>, and <strong>History</strong>. The active card shows the current ride's status (Ride in Progress), driver name, vehicle, pickup and destination, fare, and a live <strong>"Track Live"</strong> button — so users can monitor an ongoing trip without leaving the bookings tab.</div>
+                <div class="screen-badges">
+                    <span class="badge">Active Rides</span>
+                    <span class="badge">History</span>
+                    <span class="badge green">Live Track</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 13 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/13_AddPlacePage.png" alt="Saved Places"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 13</div>
+                <div class="screen-name">Saved Places</div>
+                <div class="screen-desc">Users store frequently visited locations under <strong>Home</strong>, <strong>Work</strong>, <strong>Favorites</strong>, and <strong>Other</strong> categories. A search bar allows quick filtering across saved addresses. A floating "+" button lets users add new places at any time. Each entry has a context menu for editing or deleting.</div>
+                <div class="screen-badges">
+                    <span class="badge">Home &amp; Work</span>
+                    <span class="badge orange">Favorites</span>
+                    <span class="badge">Search</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 14 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/14_WalletPage.png" alt="Wallet"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 14</div>
+                <div class="screen-name">Wallet</div>
+                <div class="screen-desc">The wallet card displays the SakayPartido balance (₱450.00) with <strong>Top Up</strong> and <strong>Withdraw</strong> quick actions. Monthly spending (₱380) and savings versus regular fare (₱120) are highlighted. Linked payment methods — GCash, Cash, and PayMaya — are listed below. A promo banner advertises ₱50 off for top-ups of ₱200 or more.</div>
+                <div class="screen-badges">
+                    <span class="badge purple">Balance</span>
+                    <span class="badge green">Savings</span>
+                    <span class="badge orange">Promo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 15 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/15_ProfilePage.png" alt="Profile"
+                     onerror="this.style.background='#3b82f6'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 15</div>
+                <div class="screen-name">Profile</div>
+                <div class="screen-desc">The profile screen shows the user's avatar, verified badge, and member-since date. Personal info (phone, email) is displayed securely. Quick links to <strong>Payment Methods</strong>, <strong>Saved Places</strong>, <strong>Ride History</strong>, and <strong>Notifications</strong> make account management centralized and accessible in one place.</div>
+                <div class="screen-badges">
+                    <span class="badge green">Verified</span>
+                    <span class="badge">Account Settings</span>
+                    <span class="badge">History</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Screen 16 -->
+        <div class="screen-card">
+            <div class="phone-frame">
+                <img src="images/screens/16_SOSPage.png" alt="SOS Page"
+                     onerror="this.style.background='#ef4444'">
+            </div>
+            <div class="screen-body">
+                <div class="screen-num">Screen 16</div>
+                <div class="screen-name">SOS Emergency Page</div>
+                <div class="screen-desc">When the SOS button is triggered, the screen turns red with a clear <strong>"SOS ACTIVATED – Help is on the way"</strong> header. The activation time, live location sharing status, and siren state are shown. The user's exact GPS coordinates are displayed with a map link. Local emergency contacts — PNP Partido, Partido Emergency Response, and Partido Rescue Unit — are one tap away.</div>
+                <div class="screen-badges">
+                    <span class="badge red">SOS Active</span>
+                    <span class="badge red">Live Location</span>
+                    <span class="badge red">Emergency Contacts</span>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <!-- DESIGN NOTES -->
-    <div class="section-divider" style="margin-top:2rem;">
-        <h2 class="section-title">Design Notes</h2>
+    <!-- Summary strip -->
+    <div class="section-divider">
+        <h2 class="section-title">Walkthrough Summary</h2>
     </div>
 
-    <div class="card">
-        <h3>🎨 Visual &amp; UX Design Decisions</h3>
-        <p>
-            The Sakay Partido prototype was designed with a clean, minimal blue-dominant color scheme that conveys trust, reliability, and movement — 
-            all qualities essential for a transportation service. The use of rounded corners, card-based layouts, and clear call-to-action 
-            buttons follows current mobile UI best practices.
-        </p>
-        <p>
-            Typography uses a bold, readable font hierarchy to guide user attention naturally from headings to actions. 
-            White space is used intentionally to reduce cognitive load, particularly on the booking and confirmation screens 
-            where clarity is critical.
-        </p>
-        <p>
-            Every screen was designed with the target audience in mind — young university students who are comfortable 
-            with smartphones but may be first-time users of a dedicated ride-booking platform. Simplicity and speed 
-            were the guiding principles throughout the design process.
-        </p>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:1rem; margin-bottom:2.5rem;">
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">📱</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">16 Screens</h3>
+                <p style="font-size:0.87rem;">Full end-to-end prototype from splash screen to ride completion and emergency features.</p>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">🛵</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">2 Ride Types</h3>
+                <p style="font-size:0.87rem;">Motor (door-to-door, ₱30) and Tricycle (shared, ₱20) — tailored to Partido commuters.</p>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">🔴</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">Safety-First Design</h3>
+                <p style="font-size:0.87rem;">SOS button, live location sharing, local emergency contacts, and siren — all accessible during a ride.</p>
+            </div>
+        </div>
+        <div class="card" style="margin-bottom:0; display:flex; align-items:flex-start; gap:1rem;">
+            <div style="font-size:1.8rem; flex-shrink:0;">💳</div>
+            <div>
+                <h3 style="border:none; padding:0; margin-bottom:0.3rem; font-size:0.95rem;">3 Payment Methods</h3>
+                <p style="font-size:0.87rem;">Cash, SakayPartido Wallet, and GCash — covering banked and unbanked users alike.</p>
+            </div>
+        </div>
     </div>
 
 </main>
@@ -350,23 +603,14 @@
 </footer>
 
 <script>
-    const btn = document.getElementById('moreBtn');
+    const btn  = document.getElementById('moreBtn');
     const menu = document.getElementById('dropdownMenu');
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        btn.classList.toggle('open');
-        menu.classList.toggle('open');
-    });
-    document.addEventListener('click', () => {
-        btn.classList.remove('open');
-        menu.classList.remove('open');
-    });
+    btn.addEventListener('click', e => { e.stopPropagation(); btn.classList.toggle('open'); menu.classList.toggle('open'); });
+    document.addEventListener('click', () => { btn.classList.remove('open'); menu.classList.remove('open'); });
+
     const hamburger = document.getElementById('hamburger');
     const mobileNav = document.getElementById('mobileNav');
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('open');
-        mobileNav.classList.toggle('open');
-    });
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); mobileNav.classList.toggle('open'); });
 </script>
 </body>
 </html>
