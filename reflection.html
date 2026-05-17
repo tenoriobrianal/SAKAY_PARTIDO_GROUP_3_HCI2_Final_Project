@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakay Partido – Reflection</title>
+    <title>Reflections – Sakay Partido</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .section-divider {
@@ -19,8 +19,208 @@
             background: linear-gradient(to right, var(--primary, #3b82f6), transparent);
             border-radius: 99px;
         }
-        .section-title {
-            white-space: nowrap;
+        .section-title { white-space: nowrap; }
+
+        /* ── Reflection cards ── */
+        .reflection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .reflection-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .reflection-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(59,130,246,0.13);
+        }
+
+        /* Coloured top banner per member */
+        .card-banner {
+            padding: 1.5rem 1.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .card-banner.blue   { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+        .card-banner.teal   { background: linear-gradient(135deg, #0f766e, #14b8a6); }
+        .card-banner.violet { background: linear-gradient(135deg, #6d28d9, #8b5cf6); }
+        .card-banner.rose   { background: linear-gradient(135deg, #be123c, #f43f5e); }
+
+        .member-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.5);
+            object-fit: cover;
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .banner-info { flex: 1; }
+        .banner-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+        }
+        .banner-role {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.8);
+            margin-top: 0.2rem;
+        }
+        .banner-task {
+            display: inline-block;
+            margin-top: 0.45rem;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.15rem 0.65rem;
+            border-radius: 99px;
+            letter-spacing: 0.04em;
+        }
+
+        /* Quote / reflection body */
+        .card-body {
+            padding: 1.25rem 1.5rem 1.5rem;
+            flex: 1;
+            position: relative;
+        }
+        .quote-mark {
+            font-size: 4rem;
+            line-height: 1;
+            color: #e5e7eb;
+            font-family: Georgia, serif;
+            position: absolute;
+            top: 0.5rem;
+            left: 1.1rem;
+            pointer-events: none;
+            user-select: none;
+        }
+        .reflection-text {
+            font-size: 0.9rem;
+            color: #374151;
+            line-height: 1.75;
+            padding-top: 1.5rem;  /* clear the quote mark */
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Intro strip */
+        .page-intro {
+            background: linear-gradient(135deg, #e8f0fe, #f0f7ff);
+            border: 1px solid #c7d9f8;
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+        .page-intro .icon-big { font-size: 2.2rem; flex-shrink: 0; }
+        .page-intro p { margin: 0; color: #374151; font-size: 0.93rem; line-height: 1.7; }
+        .page-intro strong { color: #1d4ed8; }
+
+        /* ── Group / collective reflection ── */
+        .group-reflection {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%);
+            border-radius: 20px;
+            padding: 2rem 2rem 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .group-reflection::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .gr-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .gr-avatars {
+            display: flex;
+        }
+        .gr-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2.5px solid rgba(255,255,255,0.6);
+            margin-left: -10px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .gr-avatar:first-child { margin-left: 0; }
+        .gr-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .gr-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .gr-subtitle {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.75);
+            margin-top: 0.15rem;
+        }
+        .gr-quote {
+            color: rgba(255,255,255,0.2);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 6rem;
+        }
+        .gr-text {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.93);
+            line-height: 1.8;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 600px) {
+            .reflection-grid { grid-template-columns: 1fr; }
+            .page-intro { flex-direction: column; }
+            .group-reflection { padding: 1.5rem; }
+            .gr-quote { display: none; }
         }
     </style>
 </head>
@@ -46,7 +246,7 @@
                 </svg>
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="reflection.html" style="background:#eff6ff; color:var(--primary);"><span class="icon">💭</span> Reflection</a>
+                <a href="reflection.html" class="active"><span class="icon">💭</span> Reflection</a>
                 <a href="prototype.html"><span class="icon">📱</span> Prototype Walkthrough</a>
             </div>
         </div>
@@ -55,6 +255,8 @@
         <span></span><span></span><span></span>
     </button>
 </nav>
+
+<!-- Mobile drawer -->
 <div class="mobile-nav" id="mobileNav">
     <a href="index.html">🏠 Home</a>
     <a href="data-gathering.html">📋 Data Gathering</a>
@@ -63,73 +265,133 @@
     <a href="prototype.html">📱 Prototype Walkthrough</a>
 </div>
 
-<!-- ─── HEADER ─── -->
+<!-- ─── HERO ─── -->
 <div class="page-header">
-    <div class="tag">Reflection</div>
-    <h1>Our Reflections</h1>
-    <p>Personal insights and takeaways from each group member about the usability evaluation experience.</p>
+    <div class="tag">Group Reflections</div>
+    <h1>What We Learned</h1>
+    <p>Personal takeaways from each group member on usability, HCI, and the Sakay Partido evaluation experience.</p>
 </div>
 
 <!-- ─── MAIN ─── -->
 <main>
 
-    <div class="highlight-box" style="margin-bottom:2rem;">
-        <h4>💡 About This Section</h4>
-        <p>Each member of the Sakay Partido team shares their personal reflection on what they learned, what challenges they encountered, and how this study shaped their understanding of user-centered design.</p>
-    </div>
-
-    <!-- BRIAN -->
-    <div class="reflection-block">
-        <div class="author">
-            <div class="author-avatar">BAT</div>
-            <div class="author-info">
-                <strong>Brian Al Tenorio</strong>
-                <span>Project Leader — Data Analyst / Documenter</span>
-            </div>
-        </div>
-        
-    </div>
-
-    <!-- SHEJAY -->
-    <div class="reflection-block">
-        <div class="author">
-            <div class="author-avatar">SB</div>
-            <div class="author-info">
-                <strong>Shejay Barranda</strong>
-                <span>Member - UI/UX Designer</span>
-            </div>
+    <div class="page-intro">
+        <div class="icon-big">💭</div>
+        <div>
+            <p>Each member of the <strong>Sakay Partido</strong> team shares their personal reflection on what they learned, what challenges they encountered, and how this study shaped their understanding of user-centered design.</p>
         </div>
     </div>
 
-    <!-- MARY ROSE -->
-    <div class="reflection-block">
-        <div class="author">
-            <div class="author-avatar">MRO</div>
-            <div class="author-info">
-                <strong>Mary Rose Oriana</strong>
-                <span>Member - Prototype Presenter / Data Gatherer</span>
+    <div class="section-divider">
+        <h2 class="section-title">Member Reflections</h2>
+    </div>
+
+    <div class="reflection-grid">
+
+        <!-- Brian Al Tenorio -->
+        <div class="reflection-card">
+            <div class="card-banner blue">
+                <div class="member-avatar">
+                    <img src="Brian.jpg" alt="Brian Al Tenorio"
+                         onerror="this.parentElement.textContent='BAT'">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Brian Al Tenorio</div>
+                    <div class="banner-role">Project Leader · Data Analyst / Documenter</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="quote-mark">"</div>
+                <p class="reflection-text">Leading this project from the prototype stage all the way to usability testing was both challenging and rewarding. When we were building Sakay Partido, I was mostly focused on making sure everything was complete and functional, but during the actual testing, I realized how different it feels to watch real users interact with something we made. It made me understand that being the designer and being the user are two completely different perspectives. The usability testing phase taught me more about HCI than any lecture could, because the feedback was real, immediate, and honest.           
+
+                </div>
+        </div>
+
+        <!-- Shejay Barranda -->
+        <div class="reflection-card">
+            <div class="card-banner teal">
+                <div class="member-avatar">
+                    <img src="images/maria.jpg" alt="Shejay Barranda"
+                         onerror="this.parentElement.textContent='SB'">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Shejay Barranda</div>
+                    <div class="banner-role">Member · UI/UX Designer</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="quote-mark">"</div>
+                <p class="reflection-text">As the UI/UX designer of the group, I always focused on how the app looked — but evaluating the wallet flow made me realize that aesthetics alone aren't enough. Having a separate wallet page buried inside settings actually goes against the idea of minimalist design, where every screen should earn its place. I learned that good design isn't about adding more; it's about removing what doesn't need to be there so users can get to what they need without thinking twice.</p>
             </div>
         </div>
-    </div>
 
-    <!-- CHRISTINE -->
-    <div class="reflection-block">
-        <div class="author">
-            <div class="author-avatar">CJS</div>
-            <div class="author-info">
-                <strong>Christine Joy Saor</strong>
-                <span>Member - Documenter</span>
+        <!-- Mary Rose Oriana -->
+        <div class="reflection-card">
+            <div class="card-banner violet">
+                <div class="member-avatar">
+                    <img src="MR Oriana.jpg" alt="Mary Rose Oriana"
+                         onerror="this.parentElement.textContent='MRO'">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Mary Rose Oriana</div>
+                    <div class="banner-role">Member · Prototype Presenter / Data Gatherer</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="quote-mark">"</div>
+                <p class="reflection-text">Being the one who presented the prototype and gathered data during testing. It made me realize that data gathering isn't just about collecting scores, it's about observing real human behavior, and those small moments of confusion are just as important as any number on the SUS questionnaire.            
+                    
+                </div>
+        </div>
+
+        <!-- Christine Joy Saor -->
+        <div class="reflection-card">
+            <div class="card-banner rose">
+                <div class="member-avatar">
+                    <img src="CJ Saor.jpg" alt="Christine Joy Saor"
+                         onerror="this.parentElement.textContent='CJS'">
+                </div>
+                <div class="banner-info">
+                    <div class="banner-name">Christine Joy Saor</div>
+                    <div class="banner-role">Member · Documenter</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="quote-mark">"</div>
+                <p class="reflection-text">Documenting the evaluation process made me pay really close attention to the details that are easy to overlook. My task was checking feedback consistency, and I found that some popup icons didn't match the overall design style — which sounds minor, but it actually breaks a user's trust in the app without them even knowing why it feels "off." I learned that consistency in HCI isn't just a design preference; it's a form of communication. When everything looks and behaves the same way, users feel confident. When it doesn't, they start to second-guess themselves.</p>
             </div>
         </div>
+
     </div>
 
-    <!-- GROUP REFLECTION -->
-    <div class="section-divider" style="margin-top:2.5rem;">
-        <h2 class="section-title">Group Reflection</h2>
+    <!-- Group Reflection -->
+    <div class="section-divider">
+        <h2 class="section-title">Our Collective Reflection</h2>
     </div>
 
-    <div class="card">
-        <h3>Collective Takeaways</h3>
+    <div class="group-reflection">
+        <div class="gr-header">
+            <div class="gr-avatars">
+                <div class="gr-avatar" style="background:#1d4ed8;">
+                    <img src="Brian.jpg" alt="BAT" onerror="this.parentElement.textContent='BAT'">
+                </div>
+                <div class="gr-avatar" style="background:#0f766e;">
+                    <img src="images/maria.jpg" alt="SB" onerror="this.parentElement.textContent='SB'">
+                </div>
+                <div class="gr-avatar" style="background:#6d28d9;">
+                    <img src="MR Oriana.jpg" alt="MRO" onerror="this.parentElement.textContent='MRO'">
+                </div>
+                <div class="gr-avatar" style="background:#be123c;">
+                    <img src="CJ Saor.jpg" alt="CJS" onerror="this.parentElement.textContent='CJS'">
+                </div>
+            </div>
+            <div>
+                <div class="gr-title">Group 3 — Sakay Partido Team</div>
+                <div class="gr-subtitle">Brian · Shejay · Mary Rose · Christine</div>
+            </div>
+        </div>
+        <div class="quote-mark gr-quote">"</div>
+        <p class="gr-text">As a group, this project taught us that building something and actually evaluating it are two very different experiences. We designed Sakay Partido with commuters in mind, but it wasn't until we sat down with the Nielsen Norman heuristics and walked through each feature one by one that we truly understood where our design fell short. Small things we had overlooked turned out to matter a lot to real users. We also learned that usability isn't the job of just one person on the team; every role, from documenter to designer to data gatherer, contributed a different lens that made our evaluation richer and more honest. This study didn't just help us improve Sakay Partido, it changed the way we think about every digital product we'll design or use in the future.</p>
     </div>
 
 </main>
@@ -165,5 +427,6 @@
         color: var(--primary, #3b82f6);
     }
 </style>
+
 </body>
 </html>
